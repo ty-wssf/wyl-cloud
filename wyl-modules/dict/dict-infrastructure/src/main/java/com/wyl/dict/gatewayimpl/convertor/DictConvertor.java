@@ -6,6 +6,9 @@ import com.wyl.dict.gatewayimpl.database.dataobject.SysDictDataDO;
 import com.wyl.dict.gatewayimpl.database.dataobject.SysDictTypeDO;
 import org.springframework.beans.BeanUtils;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @author wyl
  * @since 2021-11-16 16:24:44
@@ -22,6 +25,20 @@ public class DictConvertor {
         SysDictDataDO dictDataDO = new SysDictDataDO();
         BeanUtils.copyProperties(dictData, dictDataDO);
         return dictDataDO;
+    }
+
+    public static SysDictType toDomainObject(SysDictTypeDO dictTypeDO, List<SysDictDataDO> dictDataDOList) {
+        SysDictType dictType = new SysDictType();
+        BeanUtils.copyProperties(dictTypeDO, dictType);
+
+        List<SysDictData> dictDataList = dictDataDOList.stream().map(dictDataDO -> {
+            SysDictData dictData = new SysDictData();
+            BeanUtils.copyProperties(dictTypeDO, dictData);
+            return dictData;
+        }).collect(Collectors.toList());
+
+        dictType.setDictDataList(dictDataList);
+        return dictType;
     }
 
 }

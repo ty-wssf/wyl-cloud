@@ -70,10 +70,10 @@ public class DictGatewayImpl implements DictGateway {
     }
 
     @Override
-    public List<SysDictType> selectDictDataByType(String dictType) {
+    public SysDictType selectDictDataByType(String dictType) {
         List<SysDictDataDO> dictDataDOList = dictDataMapper.selectByDictType(dictType);
         SysDictTypeDO dictTypeDO = dictTypeMapper.selectOneByDictType(dictType);
-        return null;
+        return DictConvertor.toDomainObject(dictTypeDO, dictDataDOList);
     }
 
     @Override

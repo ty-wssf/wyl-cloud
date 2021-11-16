@@ -71,7 +71,7 @@ public interface DictGateway {
      * @param dictType 字典类型
      * @return 字典数据集合信息
      */
-    List<SysDictType> selectDictDataByType(String dictType);
+    SysDictType selectDictDataByType(String dictType);
 
     /**
      * 根据字典类型ID查询信息
