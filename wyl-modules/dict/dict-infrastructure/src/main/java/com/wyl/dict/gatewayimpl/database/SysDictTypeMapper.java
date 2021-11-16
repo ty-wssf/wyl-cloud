@@ -1,4 +1,5 @@
 package com.wyl.dict.gatewayimpl.database;
+import org.apache.ibatis.annotations.Param;
 
 import com.wyl.dict.gatewayimpl.database.dataobject.SysDictTypeDO;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,5 +21,7 @@ public interface SysDictTypeMapper {
     int updateByPrimaryKeySelective(SysDictTypeDO record);
 
     int updateByPrimaryKey(SysDictTypeDO record);
+
+    SysDictTypeDO selectOneByDictType(@Param("dictType") String dictType);
 
 }

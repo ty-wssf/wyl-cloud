@@ -1,14 +1,16 @@
-package com.wyl.dict.gatewayimpl.database.dataobject;
+package com.wyl.dict.domain.model;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
- * 字典数据表
- *
- * @TableName sys_dict_data
+ * @author wyl
+ * @since 2021-11-16 15:52:41
  */
 @Data
-public class SysDictDataDO extends BaseDO {
+public class SysDictData {
+
     /**
      * 字典编码
      */
@@ -32,7 +34,7 @@ public class SysDictDataDO extends BaseDO {
     /**
      * 字典类型
      */
-    private String dictType;
+    private SysDictType dictType;
 
     /**
      * 样式属性（其他样式扩展）
@@ -54,5 +56,29 @@ public class SysDictDataDO extends BaseDO {
      */
     private String status;
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * 创建者
+     */
+    private String createBy;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新者
+     */
+    private String updateBy;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
 }

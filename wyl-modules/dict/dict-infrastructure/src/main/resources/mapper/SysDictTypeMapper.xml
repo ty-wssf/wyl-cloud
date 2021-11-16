@@ -112,4 +112,21 @@
             remark =  #{remark,jdbcType=VARCHAR}
         where   dict_id = #{dictId,jdbcType=BIGINT} 
     </update>
+    <select id="selectAllByDictId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dict_type
+        <where>
+            <if test="dictId != null">
+                dict_id = #{dictId,jdbcType=NUMERIC}
+            </if>
+        </where>
+    </select>
+    <select id="selectOneByDictType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dict_type
+        where
+        dict_type = #{dictType,jdbcType=VARCHAR}
+    </select>
 </mapper>
