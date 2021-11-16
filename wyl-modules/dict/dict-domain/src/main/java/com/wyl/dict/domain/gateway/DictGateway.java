@@ -21,18 +21,18 @@ public interface DictGateway {
     void insertDictType(SysDictType dictType);
 
     /**
-     * 修改保存字典类型信息
-     *
-     * @param dictType 字典类型信息
-     */
-    void updateDictType(SysDictType dictType);
-
-    /**
      * 新增保存字典数据信息
      *
      * @param dictData 字典数据信息
      */
     void insertDictData(SysDictData dictData);
+
+    /**
+     * 修改保存字典类型信息
+     *
+     * @param dictType 字典类型信息
+     */
+    void updateDictType(SysDictType dictType);
 
     /**
      * 修改保存字典数据信息
@@ -58,20 +58,12 @@ public interface DictGateway {
     void deleteDictDataByIds(Long[] dictCodes);
 
     /**
-     * 根据条件分页查询字典类型
+     * 根据条件查询字典类型列表
      *
      * @param dictType 字典类型信息
      * @return 字典类型集合信息
      */
     List<SysDictType> selectDictTypeList(SysDictType dictType);
-
-    /**
-     * 根据字典类型查询信息
-     *
-     * @param dictType 字典类型
-     * @return 字典数据集合信息
-     */
-    SysDictType selectDictDataByType(String dictType);
 
     /**
      * 根据字典类型ID查询信息
@@ -80,5 +72,21 @@ public interface DictGateway {
      * @return 字典类型
      */
     SysDictType selectDictTypeById(Long dictId);
+
+    /**
+     * 根据字典类型查询信息
+     *
+     * @param dictType 字典类型
+     * @return 字典类型
+     */
+    public SysDictType selectDictTypeByType(String dictType);
+
+    /**
+     * 根据字典类型查询字典数据
+     *
+     * @param dictType 字典类型
+     * @return 字典数据集合信息
+     */
+    public List<SysDictData> selectDictDataByType(String dictType);
 
 }

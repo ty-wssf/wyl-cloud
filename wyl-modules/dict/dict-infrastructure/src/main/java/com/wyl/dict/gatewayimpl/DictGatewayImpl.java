@@ -3,7 +3,8 @@ package com.wyl.dict.gatewayimpl;
 import com.wyl.dict.domain.gateway.DictGateway;
 import com.wyl.dict.domain.model.SysDictData;
 import com.wyl.dict.domain.model.SysDictType;
-import com.wyl.dict.gatewayimpl.convertor.DictConvertor;
+import com.wyl.dict.gatewayimpl.convertor.DictDataConvertor;
+import com.wyl.dict.gatewayimpl.convertor.DictTypeConvertor;
 import com.wyl.dict.gatewayimpl.database.SysDictDataMapper;
 import com.wyl.dict.gatewayimpl.database.SysDictTypeMapper;
 import com.wyl.dict.gatewayimpl.database.dataobject.SysDictDataDO;
@@ -32,25 +33,25 @@ public class DictGatewayImpl implements DictGateway {
 
     @Override
     public void insertDictType(SysDictType dictType) {
-        SysDictTypeDO dictTypeDO = DictConvertor.dictTypeToDataObject(dictType);
+        SysDictTypeDO dictTypeDO = DictTypeConvertor.toDataObject(dictType);
         dictTypeMapper.insert(dictTypeDO);
     }
 
     @Override
-    public void updateDictType(SysDictType dictType) {
-        SysDictTypeDO dictTypeDO = DictConvertor.dictTypeToDataObject(dictType);
-        dictTypeMapper.updateByPrimaryKeySelective(dictTypeDO);
-    }
-
-    @Override
     public void insertDictData(SysDictData dictData) {
-        SysDictDataDO dictTypeDO = DictConvertor.dictDataToDataObject(dictData);
+        SysDictDataDO dictTypeDO = DictDataConvertor.toDataObject(dictData);
         dictDataMapper.insert(dictTypeDO);
     }
 
     @Override
+    public void updateDictType(SysDictType dictType) {
+        SysDictTypeDO dictTypeDO = DictTypeConvertor.toDataObject(dictType);
+        dictTypeMapper.updateByPrimaryKeySelective(dictTypeDO);
+    }
+
+    @Override
     public void updateDictData(SysDictData dictData) {
-        SysDictDataDO dictTypeDO = DictConvertor.dictDataToDataObject(dictData);
+        SysDictDataDO dictTypeDO = DictDataConvertor.toDataObject(dictData);
         dictDataMapper.updateByPrimaryKeySelective(dictTypeDO);
     }
 
@@ -66,19 +67,27 @@ public class DictGatewayImpl implements DictGateway {
 
     @Override
     public List<SysDictType> selectDictTypeList(SysDictType dictType) {
-        return null;
-    }
-
-    @Override
-    public SysDictType selectDictDataByType(String dictType) {
-        List<SysDictDataDO> dictDataDOList = dictDataMapper.selectByDictType(dictType);
-        SysDictTypeDO dictTypeDO = dictTypeMapper.selectOneByDictType(dictType);
-        return DictConvertor.toDomainObject(dictTypeDO, dictDataDOList);
+        List<SysDictTypeDO> dictTypeDOList = dictTypeMapper.selectAll(DictTypeConvertor.toDataObject(dictType));
+        List<SysDictType> dictTypeList = DictTypeConvertor.toDomainObject(dictTypeDOList);
+        return dictTypeList;
     }
 
     @Override
     public SysDictType selectDictTypeById(Long dictId) {
-        return null;
+        SysDictTypeDO dictTypeDO = dictTypeMapper.selectByPrimaryKey(dictId);
+        return DictTypeConvertor.toDomainObject(dictTypeDO);
+    }
+
+    @Override
+    public SysDictType selectDictTypeByType(String dictType) {
+        SysDictTypeDO dictTypeDO = dictTypeMapper.selectOneByDictType(dictType);
+        return DictTypeConvertor.toDomainObject(dictTypeDO);
+    }
+
+    @Override
+    public List<SysDictData> selectDictDataByType(String dictType) {
+        List<SysDictDataDO> dictDataDOList = dictDataMapper.selectByDictType(dictType);
+        return DictDataConvertor.toDomainObject(dictDataDOList);
     }
 
 }
