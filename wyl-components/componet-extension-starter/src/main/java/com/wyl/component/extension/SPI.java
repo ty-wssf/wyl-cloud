@@ -13,4 +13,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 public @interface SPI {
 
+    /**
+     * default extension name
+     */
+    String value() default "";
+
 }

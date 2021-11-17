@@ -1,8 +1,14 @@
 package com.wyl.component.extension;
 
+import org.springframework.util.CollectionUtils;
+
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * 扩展点加载器
@@ -12,6 +18,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ExtensionLoader<T> {
 
+    private static final Pattern NAME_SEPARATOR = Pattern.compile("\\s*[,]+\\s*");
+
     //扩展接口
     private final Class<?> type;
     //扩展加载器集合，key为扩展接口，value为接口对应的扩展加载器
@@ -19,6 +27,7 @@ public class ExtensionLoader<T> {
 
     //缓存的默认扩展名，就是@SPI中设置的值
     private String cachedDefaultName;
+    private final ConcurrentMap<String, Holder<Object>> cachedInstances = new ConcurrentHashMap<String, Holder<Object>>();
     //缓存的扩展实现类集合
     private final Holder<Map<String, Class<?>>> cachedClasses = new Holder<Map<String, Class<?>>>();
 
@@ -61,15 +70,47 @@ public class ExtensionLoader<T> {
         getExtensionClasses();
         if (null == cachedDefaultName || cachedDefaultName.length() == 0
                 || "true".equals(cachedDefaultName)) {
-            return null;
+            throw new IllegalStateException("no default extension on extension " + type.getName());
         }
         return getExtension(cachedDefaultName);
     }
 
     public T getExtension(String name) {
+        if (name == null || name.length() == 0) {
+            throw new IllegalArgumentException("Extension name == null");
+        }
+        //缓存中获取对应的扩展对象
+        Holder<Object> holder = cachedInstances.computeIfAbsent(name, key -> new Holder<Object>());
+        Object instance = holder.get();
+        if (instance == null) {
+            synchronized (holder) {
+                instance = holder.get();
+                if (instance == null) {
+                    //通过扩展名创建接口实现类的对象
+                    instance = createExtension(name);
+                    //把创建的扩展对象放入缓存
+                    holder.set(instance);
+                }
+            }
+        }
+        return (T) instance;
     }
 
-    //获得扩展实现类数组，把扩展实现类放到cachedClasses中
+    private T createExtension(String name) {
+        //获得扩展名对应的扩展实现类
+        Class<?> clazz = getExtensionClasses().get(name);
+        if (clazz == null) {
+            throw new IllegalStateException("No such extension \"" + name + "\" for " + type.getName() + "!");
+        }
+        return (T) ObjectFactory.getBean(clazz);
+    }
+
+
+    /**
+     * 加载拓展实现类数组
+     *
+     * @return
+     */
     private Map<String, Class<?>> getExtensionClasses() {
         Map<String, Class<?>> classes = cachedClasses.get();
         if (classes == null) {
@@ -84,13 +125,35 @@ public class ExtensionLoader<T> {
         return classes;
     }
 
-    /**
-     * 加载拓展实现类数组
-     *
-     * @return
-     */
     private Map<String, Class<?>> loadExtensionClasses() {
-        return (Map<String, Class<?>>) ObjectFactory.getBeansOfType(type);
+        final SPI defaultAnnotation = type.getAnnotation(SPI.class);
+        if (defaultAnnotation != null) {
+            //@SPI内的默认值
+            String value = defaultAnnotation.value();
+            if ((value = value.trim()).length() > 0) {
+                String[] names = NAME_SEPARATOR.split(value);
+                //只允许有一个默认值
+                if (names.length > 1) {
+                    throw new IllegalStateException("more than 1 default extension name on extension " + type.getName()
+                            + ": " + Arrays.toString(names));
+                }
+                if (names.length == 1) cachedDefaultName = names[0];
+            }
+        }
+        Map<String, T> classes = (Map<String, T>) ObjectFactory.getBeansOfType(type);
+        if (!CollectionUtils.isEmpty(classes)) {
+            return classes.entrySet().stream()
+                    .filter(entry -> entry.getValue().getClass().isAnnotationPresent(Extension.class))
+                    .collect(Collectors.toMap(entry -> {
+                        String extenValue = entry.getValue().getClass().getAnnotation(Extension.class).value();
+                        if (extenValue == null || extenValue.length() == 0) {
+                            extenValue = entry.getKey();
+                        }
+                        return extenValue;
+                    }, entry -> entry.getValue().getClass()));
+
+        }
+        return null;
     }
 
 }

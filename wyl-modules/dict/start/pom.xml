@@ -30,10 +30,5 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.bcht.its.image</groupId>
-            <artifactId>BCHT_IMAGE_CLIENT</artifactId>
-            <version>3.0.0</version>
-        </dependency>
     </dependencies>
 </project>
