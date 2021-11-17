@@ -11,6 +11,26 @@
 
     <artifactId>componet-extension-starter</artifactId>
     <description>扩展点组件</description>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.12</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
 
 </project>
