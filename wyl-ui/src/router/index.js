@@ -167,7 +167,7 @@ export const constantRoutes = [
   {
     path: '/system',
     component: Layout,
-    redirect: '/system/dict',
+    redirect: '/system/config',
     name: '系统管理',
     meta: {
       title: '系统管理',
@@ -175,10 +175,16 @@ export const constantRoutes = [
     },
     children: [
       {
+        path: 'config',
+        component: () => import('@/views/system/config/index'),
+        name: '配置管理',
+        meta: { title: '配置管理' },
+      },
+      {
         path: 'dict',
         component: () => import('@/views/system/dict/index'),
         name: '字典管理',
-        meta: { title: '字典管理' },
+        meta: { title: '字典管理' }
       }
     ]
   }

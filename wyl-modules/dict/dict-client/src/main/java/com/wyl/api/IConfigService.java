@@ -1,7 +1,7 @@
 package com.wyl.api;
 
 import com.alibaba.cola.dto.PageResponse;
-import com.wyl.dto.SysConfigQry;
+import com.wyl.dto.ConfigPageQry;
 import com.wyl.dto.clientobject.ConfigCO;
 
 /**
@@ -10,6 +10,6 @@ import com.wyl.dto.clientobject.ConfigCO;
  */
 public interface IConfigService {
 
-    PageResponse<ConfigCO> pageSelectConfigList(SysConfigQry sysConfig);
+    PageResponse<ConfigCO> pageSelectConfigList(ConfigPageQry sysConfig);
 
 }
