@@ -12,7 +12,7 @@
     <artifactId>wyl-modules</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>dict</module>
+        <module>cola-demo</module>
     </modules>
 
 
