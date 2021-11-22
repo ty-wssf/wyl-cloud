@@ -1,15 +1,18 @@
 package com.wyl.gatewayimpl.database.dataobject;
 
+import com.alibaba.cola.dto.PageQuery;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 参数配置表
+ *
  * @TableName sys_config
  */
 @Data
-public class SysConfig implements Serializable {
+public class SysConfig extends PageQuery implements Serializable {
     /**
      * 参数主键
      */

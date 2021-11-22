@@ -1,6 +1,7 @@
 package com.wyl.gatewayimpl.database;
-
 import com.wyl.gatewayimpl.database.dataobject.SysConfig;
+
+import java.util.List;
 
 /**
  * @Entity com.wyl.gatewayimpl.database.dataobject.SysConfig
@@ -18,5 +19,7 @@ public interface SysConfigMapper {
     int updateByPrimaryKeySelective(SysConfig record);
 
     int updateByPrimaryKey(SysConfig record);
+
+    List<SysConfig> selectAllByParams(SysConfig record);
 
 }

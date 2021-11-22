@@ -5,16 +5,16 @@
 <mapper namespace="com.wyl.gatewayimpl.database.SysConfigMapper">
 
     <resultMap id="BaseResultMap" type="com.wyl.gatewayimpl.database.dataobject.SysConfig">
-            <id property="configId" column="config_id" jdbcType="BIGINT"/>
-            <result property="configName" column="config_name" jdbcType="VARCHAR"/>
-            <result property="configKey" column="config_key" jdbcType="VARCHAR"/>
-            <result property="configValue" column="config_value" jdbcType="VARCHAR"/>
-            <result property="configType" column="config_type" jdbcType="CHAR"/>
-            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <id property="configId" column="config_id" jdbcType="BIGINT"/>
+        <result property="configName" column="config_name" jdbcType="VARCHAR"/>
+        <result property="configKey" column="config_key" jdbcType="VARCHAR"/>
+        <result property="configValue" column="config_value" jdbcType="VARCHAR"/>
+        <result property="configType" column="config_type" jdbcType="CHAR"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -26,16 +26,17 @@
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from sys_config
-        where  config_id = #{configId,jdbcType=BIGINT} 
+        where config_id = #{configId,jdbcType=BIGINT}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from sys_config
         where  config_id = #{configId,jdbcType=BIGINT} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wyl.gatewayimpl.database.dataobject.SysConfig" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.wyl.gatewayimpl.database.dataobject.SysConfig" useGeneratedKeys="true">
         insert into sys_config
         ( config_id,config_name,config_key
         ,config_value,config_type,create_by
@@ -46,65 +47,66 @@
         ,#{createTime,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP}
         ,#{remark,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wyl.gatewayimpl.database.dataobject.SysConfig" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.wyl.gatewayimpl.database.dataobject.SysConfig" useGeneratedKeys="true">
         insert into sys_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="configId != null">config_id,</if>
-                <if test="configName != null">config_name,</if>
-                <if test="configKey != null">config_key,</if>
-                <if test="configValue != null">config_value,</if>
-                <if test="configType != null">config_type,</if>
-                <if test="createBy != null">create_by,</if>
-                <if test="createTime != null">create_time,</if>
-                <if test="updateBy != null">update_by,</if>
-                <if test="updateTime != null">update_time,</if>
-                <if test="remark != null">remark,</if>
+            <if test="configId != null">config_id,</if>
+            <if test="configName != null">config_name,</if>
+            <if test="configKey != null">config_key,</if>
+            <if test="configValue != null">config_value,</if>
+            <if test="configType != null">config_type,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="configId != null"> #{configId,jdbcType=BIGINT},</if>
-                <if test="configName != null"> #{configName,jdbcType=VARCHAR},</if>
-                <if test="configKey != null"> #{configKey,jdbcType=VARCHAR},</if>
-                <if test="configValue != null"> #{configValue,jdbcType=VARCHAR},</if>
-                <if test="configType != null"> #{configType,jdbcType=CHAR},</if>
-                <if test="createBy != null"> #{createBy,jdbcType=VARCHAR},</if>
-                <if test="createTime != null"> #{createTime,jdbcType=TIMESTAMP},</if>
-                <if test="updateBy != null"> #{updateBy,jdbcType=VARCHAR},</if>
-                <if test="updateTime != null"> #{updateTime,jdbcType=TIMESTAMP},</if>
-                <if test="remark != null"> #{remark,jdbcType=VARCHAR},</if>
+            <if test="configId != null">#{configId,jdbcType=BIGINT},</if>
+            <if test="configName != null">#{configName,jdbcType=VARCHAR},</if>
+            <if test="configKey != null">#{configKey,jdbcType=VARCHAR},</if>
+            <if test="configValue != null">#{configValue,jdbcType=VARCHAR},</if>
+            <if test="configType != null">#{configType,jdbcType=CHAR},</if>
+            <if test="createBy != null">#{createBy,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="updateBy != null">#{updateBy,jdbcType=VARCHAR},</if>
+            <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+            <if test="remark != null">#{remark,jdbcType=VARCHAR},</if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.wyl.gatewayimpl.database.dataobject.SysConfig">
         update sys_config
         <set>
-                <if test="configName != null">
-                    config_name = #{configName,jdbcType=VARCHAR},
-                </if>
-                <if test="configKey != null">
-                    config_key = #{configKey,jdbcType=VARCHAR},
-                </if>
-                <if test="configValue != null">
-                    config_value = #{configValue,jdbcType=VARCHAR},
-                </if>
-                <if test="configType != null">
-                    config_type = #{configType,jdbcType=CHAR},
-                </if>
-                <if test="createBy != null">
-                    create_by = #{createBy,jdbcType=VARCHAR},
-                </if>
-                <if test="createTime != null">
-                    create_time = #{createTime,jdbcType=TIMESTAMP},
-                </if>
-                <if test="updateBy != null">
-                    update_by = #{updateBy,jdbcType=VARCHAR},
-                </if>
-                <if test="updateTime != null">
-                    update_time = #{updateTime,jdbcType=TIMESTAMP},
-                </if>
-                <if test="remark != null">
-                    remark = #{remark,jdbcType=VARCHAR},
-                </if>
+            <if test="configName != null">
+                config_name = #{configName,jdbcType=VARCHAR},
+            </if>
+            <if test="configKey != null">
+                config_key = #{configKey,jdbcType=VARCHAR},
+            </if>
+            <if test="configValue != null">
+                config_value = #{configValue,jdbcType=VARCHAR},
+            </if>
+            <if test="configType != null">
+                config_type = #{configType,jdbcType=CHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
         </set>
-        where   config_id = #{configId,jdbcType=BIGINT} 
+        where config_id = #{configId,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.wyl.gatewayimpl.database.dataobject.SysConfig">
         update sys_config
@@ -120,4 +122,20 @@
             remark =  #{remark,jdbcType=VARCHAR}
         where   config_id = #{configId,jdbcType=BIGINT} 
     </update>
+    <select id="selectAllByParams" parameterType="com.wyl.gatewayimpl.database.dataobject.SysConfig" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_config
+        <where>
+            <if test="configName != null and configName != ''">
+                AND config_name like concat('%', #{configName}, '%')
+            </if>
+            <if test="configType != null and configType != ''">
+                AND config_type = #{configType}
+            </if>
+            <if test="configKey != null and configKey != ''">
+                AND config_key like concat('%', #{configKey}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>
