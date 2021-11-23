@@ -1,11 +1,12 @@
 package com.wyl.app;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CustomerValidatorTest {
 
     @Test
-    public void testValidation(){
+    public void testValidation() {
 
     }
+
 }
