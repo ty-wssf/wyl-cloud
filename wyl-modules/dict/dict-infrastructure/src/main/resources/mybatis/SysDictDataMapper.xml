@@ -151,4 +151,11 @@
             remark =  #{remark,jdbcType=VARCHAR}
         where   dict_code = #{dictCode,jdbcType=BIGINT} 
     </update>
+    <select id="selectOneByDictType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dict_data
+        where
+        dict_type = #{dictType,jdbcType=VARCHAR}
+    </select>
 </mapper>

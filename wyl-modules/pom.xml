@@ -13,13 +13,22 @@
     <packaging>pom</packaging>
     <modules>
         <module>dict</module>
+        <module>gateway</module>
     </modules>
 
     <properties>
-        <spring-boot.version>2.5.6</spring-boot.version>
+        <spring-boot.version>2.4.2</spring-boot.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
     </properties>
+
+    <dependencies>
+        <!-- bootstrap 启动器 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+    </dependencies>
 
     <!-- 依赖声明 -->
     <dependencyManagement>

@@ -17,8 +17,14 @@ import '@/permission' // permission control
 
 import { resetForm } from "@/utils/common";
 
+// 分页组件
+import Pagination from "@/components/Pagination";
+
 // 全局方法挂载
 Vue.prototype.resetForm = resetForm
+
+// 全局组件挂载
+Vue.component('Pagination', Pagination)
 
 /**
  * If you don't want to use mock-server
