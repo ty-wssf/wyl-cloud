@@ -1,5 +1,6 @@
 package com.wyl.dict.service;
 
+import com.alibaba.cola.catchlog.CatchAndLog;
 import com.alibaba.cola.dto.PageResponse;
 import com.wyl.api.IConfigService;
 import com.wyl.domain.gateway.ConfigGateway;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
  * @author wyl
  * @since 2021-11-22 17:54:41
  */
+@CatchAndLog
 @Component
 public class ConfigServiceImpl implements IConfigService {
 

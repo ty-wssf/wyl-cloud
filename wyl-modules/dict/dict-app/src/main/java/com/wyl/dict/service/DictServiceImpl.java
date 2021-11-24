@@ -1,5 +1,6 @@
 package com.wyl.dict.service;
 
+import com.alibaba.cola.catchlog.CatchAndLog;
 import com.alibaba.cola.dto.SingleResponse;
 import com.wyl.api.IDictService;
 import com.wyl.domain.gateway.DictGateway;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
  * @author wyl
  * @since 2021-11-22 14:30:16
  */
+@CatchAndLog
 @Service
 public class DictServiceImpl implements IDictService {
 
