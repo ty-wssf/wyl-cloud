@@ -2,8 +2,8 @@ package com.wyl.dict.service;
 
 import com.alibaba.cola.catchlog.CatchAndLog;
 import com.alibaba.cola.dto.SingleResponse;
-import com.wyl.api.IDictService;
-import com.wyl.domain.gateway.DictGateway;
+import com.wyl.api.IDictTypeService;
+import com.wyl.domain.gateway.DictTypeGateway;
 import com.wyl.dto.clientobject.DictTypeCO;
 import com.wyl.gatewayimpl.database.dataobject.SysDictType;
 import org.springframework.beans.BeanUtils;
@@ -16,10 +16,10 @@ import org.springframework.stereotype.Service;
  */
 @CatchAndLog
 @Service
-public class DictServiceImpl implements IDictService {
+public class DictTypeServiceImpl implements IDictTypeService {
 
     @Autowired
-    private DictGateway dictGateway;
+    private DictTypeGateway dictGateway;
 
     @Override
     public SingleResponse<DictTypeCO> selectDictTypeById(Long dictId) {

@@ -4,10 +4,12 @@ import com.alibaba.cola.dto.PageResponse;
 import com.wyl.gatewayimpl.database.dataobject.SysDictType;
 
 /**
+ * 字典配型
+ *
  * @author wyl
  * @since 2021-11-22 11:34:08
  */
-public interface DictGateway {
+public interface DictTypeGateway {
 
     /**
      * 根据条件分页查询字典类型

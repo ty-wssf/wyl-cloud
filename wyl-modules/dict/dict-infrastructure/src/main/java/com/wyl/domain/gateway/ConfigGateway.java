@@ -4,6 +4,8 @@ import com.alibaba.cola.dto.PageResponse;
 import com.wyl.gatewayimpl.database.dataobject.SysConfig;
 
 /**
+ * 配置项
+ *
  * @author wyl
  * @since 2021-11-22 17:39:21
  */

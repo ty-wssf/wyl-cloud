@@ -1,12 +1,11 @@
 package com.wyl.dict;
 
 import com.wyl.DictApplication;
-import com.wyl.domain.gateway.DictGateway;
+import com.wyl.domain.gateway.DictTypeGateway;
 import com.wyl.gatewayimpl.database.dataobject.SysDictType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author wyl
@@ -16,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class TestDictGateway {
 
     @Autowired
-    private DictGateway dictGateway;
+    private DictTypeGateway dictGateway;
 
     @Test
     public void testPageSelectDictTypeList() {

@@ -15,16 +15,22 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+// 重置表单
 import { resetForm } from "@/utils/common";
-
 // 分页组件
 import Pagination from "@/components/Pagination";
+// 字典数据组件
+import DictData from '@/components/DictData'
 
 // 全局方法挂载
 Vue.prototype.resetForm = resetForm
 
 // 全局组件挂载
+// 分页组件
 Vue.component('Pagination', Pagination)
+
+
+DictData.install()
 
 /**
  * If you don't want to use mock-server

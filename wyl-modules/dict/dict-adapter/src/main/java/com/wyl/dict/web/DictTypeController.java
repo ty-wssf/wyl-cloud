@@ -1,7 +1,7 @@
 package com.wyl.dict.web;
 
 import com.alibaba.cola.dto.SingleResponse;
-import com.wyl.api.IDictService;
+import com.wyl.api.IDictTypeService;
 import com.wyl.dto.clientobject.DictTypeCO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/dict")
 @RestController
-public class DictController {
+public class DictTypeController {
 
     @Autowired
-    private IDictService dictService;
+    private IDictTypeService dictService;
 
     @GetMapping(value = "/type/{dictId}")
     public SingleResponse<DictTypeCO> getInfo(@PathVariable Long dictId) {

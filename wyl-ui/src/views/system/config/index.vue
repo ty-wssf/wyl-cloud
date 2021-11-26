@@ -23,12 +23,12 @@
       </el-form-item>
       <el-form-item label="系统内置" prop="configType">
         <el-select v-model="queryParams.configType" placeholder="系统内置" clearable size="small">
-          <!--<el-option
+          <el-option
             v-for="dict in dict.type.sys_yes_no"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"
-          />-->
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间">
@@ -101,6 +101,7 @@
 
   export default {
     name: "Config",
+    dicts: ['sys_yes_no'],
     data() {
       return {
         // 遮罩层

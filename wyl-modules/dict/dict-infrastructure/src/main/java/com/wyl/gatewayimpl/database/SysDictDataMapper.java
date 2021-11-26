@@ -1,6 +1,8 @@
 package com.wyl.gatewayimpl.database;
-
 import com.wyl.gatewayimpl.database.dataobject.SysDictData;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Entity com.wyl.gatewayimpl.database.dataobject.SysDictData
@@ -18,5 +20,7 @@ public interface SysDictDataMapper {
     int updateByPrimaryKeySelective(SysDictData record);
 
     int updateByPrimaryKey(SysDictData record);
+
+    List<SysDictData> selectByDictType(@Param("dictType") String dictType);
 
 }

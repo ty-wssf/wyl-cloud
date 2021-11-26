@@ -12,6 +12,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 配置项
+ *
  * @author wyl
  * @since 2021-11-22 17:40:15
  */

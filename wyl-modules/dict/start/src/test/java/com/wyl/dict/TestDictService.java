@@ -1,7 +1,7 @@
 package com.wyl.dict;
 
 import com.wyl.DictApplication;
-import com.wyl.api.IDictService;
+import com.wyl.api.IDictTypeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestDictService {
 
     @Autowired
-    private IDictService dictService;
+    private IDictTypeService dictService;
 
     @Test
     public void testSelectDictTypeById() {
