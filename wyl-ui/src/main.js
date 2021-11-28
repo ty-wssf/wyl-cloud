@@ -4,9 +4,11 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+// import locale from 'element-ui/lib/locale/lang/en' // 英文
+import locale from 'element-ui/lib/locale/lang/zh-CN' // 中文
 
 import '@/styles/index.scss' // global css
+import '@/assets/styles/common.scss' // common css
 
 import App from './App'
 import store from './store'
@@ -16,14 +18,16 @@ import '@/icons' // icon
 import '@/permission' // permission control
 
 // 重置表单
-import { resetForm } from "@/utils/common";
+import { parseTime, resetForm, addDateRange } from "@/utils/common";
 // 分页组件
 import Pagination from "@/components/Pagination";
 // 字典数据组件
 import DictData from '@/components/DictData'
 
 // 全局方法挂载
+Vue.prototype.parseTime = parseTime
 Vue.prototype.resetForm = resetForm
+Vue.prototype.addDateRange = addDateRange
 
 // 全局组件挂载
 // 分页组件

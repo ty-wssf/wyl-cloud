@@ -3,6 +3,7 @@ package com.wyl.dto.clientobject;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author wyl
@@ -35,5 +36,15 @@ public class ConfigCO implements Serializable {
      * 系统内置（1是 0否）
      */
     private String configType;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 备注
+     */
+    private String remark;
 
 }

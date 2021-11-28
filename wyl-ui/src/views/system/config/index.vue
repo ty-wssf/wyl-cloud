@@ -61,11 +61,11 @@
         </template>
       </el-table-column>-->
       <el-table-column label="备注" align="center" prop="remark" :show-overflow-tooltip="true"/>
-      <!--<el-table-column label="创建时间" align="center" prop="createTime" width="180">
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
-      </el-table-column>-->
+      </el-table-column>
       <!--<el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -155,7 +155,7 @@
       /** 查询参数列表 */
       pageList() {
         this.loading = true;
-        pageList(this.queryParams).then(response => {
+        pageList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
             this.configList = response.data;
             this.total = response.totalCount;
             this.loading = false;
