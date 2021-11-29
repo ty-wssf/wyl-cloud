@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * 参数配置表
@@ -63,5 +64,9 @@ public class SysConfig extends PageQuery implements Serializable {
      */
     private String remark;
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * 请求参数
+     */
+    private Map<String, Object> params;
+
 }

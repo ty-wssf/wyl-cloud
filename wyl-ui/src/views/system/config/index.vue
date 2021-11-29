@@ -155,6 +155,8 @@
       /** 查询参数列表 */
       pageList() {
         this.loading = true;
+        const a = this.addDateRange(this.queryParams, this.dateRange)
+        debugger
         pageList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
             this.configList = response.data;
             this.total = response.totalCount;
