@@ -2,8 +2,11 @@ package com.wyl.dict.service;
 
 import com.alibaba.cola.catchlog.CatchAndLog;
 import com.alibaba.cola.dto.PageResponse;
+import com.alibaba.cola.dto.Response;
 import com.wyl.api.IConfigService;
 import com.wyl.domain.gateway.ConfigGateway;
+import com.wyl.dto.ConfigAddCmd;
+import com.wyl.dto.ConfigEditCmd;
 import com.wyl.dto.ConfigPageQry;
 import com.wyl.dto.clientobject.ConfigCO;
 import com.wyl.gatewayimpl.database.dataobject.SysConfig;
@@ -37,6 +40,16 @@ public class ConfigServiceImpl implements IConfigService {
                     return configCO;
                 }).collect(Collectors.toList());
         return PageResponse.of(configCOList, pageResponse.getTotalCount(), pageResponse.getPageSize(), pageResponse.getPageIndex());
+    }
+
+    @Override
+    public Response addConfig(ConfigAddCmd configAddCmd) {
+        return null;
+    }
+
+    @Override
+    public Response editConfig(ConfigEditCmd configAddCmd) {
+        return null;
     }
 
 }
