@@ -23,6 +23,10 @@ import { parseTime, resetForm, addDateRange } from "@/utils/common";
 import Pagination from "@/components/Pagination";
 // 字典数据组件
 import DictData from '@/components/DictData'
+// 字典标签组件
+import DictTag from '@/components/DictTag'
+// 自定义表格工具组件
+import RightToolbar from "@/components/RightToolbar"
 
 // 全局方法挂载
 Vue.prototype.parseTime = parseTime
@@ -31,8 +35,9 @@ Vue.prototype.addDateRange = addDateRange
 
 // 全局组件挂载
 // 分页组件
+Vue.component('DictTag', DictTag)
 Vue.component('Pagination', Pagination)
-
+Vue.component('RightToolbar', RightToolbar)
 
 DictData.install()
 

@@ -49,17 +49,21 @@
       </el-form-item>
     </el-form>
 
+    <el-row :gutter="10" class="mb8">
+      <right-toolbar :showSearch.sync="showSearch" @queryTable="pageList"></right-toolbar>
+    </el-row>
+
     <el-table v-loading="loading" :data="configList">
       <el-table-column type="selection" width="55" align="center"/>
       <el-table-column label="参数主键" align="center" prop="configId"/>
       <el-table-column label="参数名称" align="center" prop="configName" :show-overflow-tooltip="true"/>
       <el-table-column label="参数键名" align="center" prop="configKey" :show-overflow-tooltip="true"/>
       <el-table-column label="参数键值" align="center" prop="configValue"/>
-      <!--<el-table-column label="系统内置" align="center" prop="configType">
+      <el-table-column label="系统内置" align="center" prop="configType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_yes_no" :value="scope.row.configType"/>
         </template>
-      </el-table-column>-->
+      </el-table-column>
       <el-table-column label="备注" align="center" prop="remark" :show-overflow-tooltip="true"/>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
@@ -155,8 +159,6 @@
       /** 查询参数列表 */
       pageList() {
         this.loading = true;
-        const a = this.addDateRange(this.queryParams, this.dateRange)
-        debugger
         pageList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
             this.configList = response.data;
             this.total = response.totalCount;

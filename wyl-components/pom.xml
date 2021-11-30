@@ -12,7 +12,8 @@
     <artifactId>wyl-components</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>componet-extension-starter</module>
+        <module>component-extension-starter</module>
+        <module>component-common-core</module>
     </modules>
 
     <properties>
