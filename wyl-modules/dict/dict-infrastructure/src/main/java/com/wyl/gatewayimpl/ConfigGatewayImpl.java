@@ -1,7 +1,6 @@
 package com.wyl.gatewayimpl;
 
 import com.alibaba.cola.dto.PageResponse;
-import com.alibaba.cola.dto.Response;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wyl.domain.gateway.ConfigGateway;
@@ -28,7 +27,7 @@ public class ConfigGatewayImpl implements ConfigGateway {
     @Override
     public PageResponse<SysConfig> pageSelectConfigList(SysConfig sysConfig) {
         PageHelper.startPage(sysConfig.getPageIndex(), sysConfig.getPageSize());
-        List<SysConfig> configList = configMapper.selectAllByParams(sysConfig);
+        List<SysConfig> configList = configMapper.selectAllBySelective(sysConfig);
         PageInfo<SysConfig> pageInfo = new PageInfo<SysConfig>(configList);
         return PageResponse.of(pageInfo.getList(), (int) pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getPageNum());
     }
@@ -36,6 +35,11 @@ public class ConfigGatewayImpl implements ConfigGateway {
     @Override
     public SysConfig selectByPrimaryKey(Long id) {
         return configMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public SysConfig selectOneBySelective(SysConfig sysConfig) {
+        return configMapper.selectOneBySelective(sysConfig);
     }
 
     @Override

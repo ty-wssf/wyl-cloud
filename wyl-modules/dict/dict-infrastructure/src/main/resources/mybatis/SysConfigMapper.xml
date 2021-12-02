@@ -122,7 +122,7 @@
             remark =  #{remark,jdbcType=VARCHAR}
         where   config_id = #{configId,jdbcType=BIGINT} 
     </update>
-    <select id="selectAllByParams" parameterType="com.wyl.gatewayimpl.database.dataobject.SysConfig"
+    <select id="selectAllBySelective" parameterType="com.wyl.gatewayimpl.database.dataobject.SysConfig"
             resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -142,6 +142,16 @@
             </if>
             <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
                 and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            </if>
+        </where>
+    </select>
+    <select id="selectOneBySelective" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_config
+        <where>
+            <if test="configKey != null and configKey != ''">
+                AND config_key = #{configKey}
             </if>
         </where>
     </select>

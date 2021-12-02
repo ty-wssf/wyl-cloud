@@ -20,6 +20,8 @@ public interface SysConfigMapper {
 
     int updateByPrimaryKey(SysConfig record);
 
-    List<SysConfig> selectAllByParams(SysConfig record);
+    List<SysConfig> selectAllBySelective(SysConfig record);
+
+    SysConfig selectOneBySelective(SysConfig record);
 
 }

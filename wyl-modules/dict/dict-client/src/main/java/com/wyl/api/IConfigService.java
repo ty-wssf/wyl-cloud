@@ -2,6 +2,7 @@ package com.wyl.api;
 
 import com.alibaba.cola.dto.PageResponse;
 import com.alibaba.cola.dto.Response;
+import com.alibaba.cola.dto.SingleResponse;
 import com.wyl.dto.ConfigAddCmd;
 import com.wyl.dto.ConfigEditCmd;
 import com.wyl.dto.ConfigPageQry;
@@ -13,19 +14,16 @@ import com.wyl.dto.clientobject.ConfigCO;
  */
 public interface IConfigService {
 
-    /**
-     * 查询参数配置列表
-     */
     PageResponse<ConfigCO> pageSelectConfigList(ConfigPageQry sysConfig);
 
-    /**
-     * 新增参数配置
-     */
+    SingleResponse<ConfigCO> getConfigInfo(Long configId);
+
     Response addConfig(ConfigAddCmd configAddCmd);
 
-    /**
-     * 新增参数配置
-     */
     Response editConfig(ConfigEditCmd configAddCmd);
+
+    Response removeConfig(Long[] configIds);
+
+    SingleResponse<String> getConfigValueByKey(String configKey);
 
 }
