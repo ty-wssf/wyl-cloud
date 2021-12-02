@@ -33,7 +33,7 @@ public class ConfigController extends BaseController {
 
     @PostMapping
     public Response addConfig(@Validated @RequestBody ConfigAddCmd configAddCmd) {
-        return configService.addConfig(configAddCmd);
+        return null;//configService.addConfig(configAddCmd);
     }
 
     @PutMapping

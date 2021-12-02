@@ -50,6 +50,27 @@
     </el-form>
 
     <el-row :gutter="10" class="mb8">
+      <el-col :span="1.5">
+        <el-button
+          type="primary"
+          plain
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+        >新增
+        </el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="success"
+          plain
+          icon="el-icon-edit"
+          size="mini"
+          :disabled="single"
+          @click="handleUpdate"
+        >修改
+        </el-button>
+      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="pageList"></right-toolbar>
     </el-row>
 
@@ -97,11 +118,44 @@
       :limit.sync="queryParams.pageSize"
       @pagination="pageList"
     />
+
+    <!-- 添加或修改参数配置对话框 -->
+    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="参数名称" prop="configName">
+          <el-input v-model="form.configName" placeholder="请输入参数名称"/>
+        </el-form-item>
+        <el-form-item label="参数键名" prop="configKey">
+          <el-input v-model="form.configKey" placeholder="请输入参数键名"/>
+        </el-form-item>
+        <el-form-item label="参数键值" prop="configValue">
+          <el-input v-model="form.configValue" placeholder="请输入参数键值"/>
+        </el-form-item>
+        <el-form-item label="系统内置" prop="configType">
+          <el-radio-group v-model="form.configType">
+            <el-radio
+              v-for="dict in dict.type.sys_yes_no"
+              :key="dict.value"
+              :label="dict.value"
+            >{{dict.label}}
+            </el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-  import {pageList} from "@/api/system/config";
+  import {pageList, addConfig} from "@/api/system/config";
 
   export default {
     name: "Config",
@@ -176,6 +230,59 @@
         this.dateRange = [];
         this.resetForm("queryForm");
         this.handleQuery();
+      },
+      // 表单重置
+      reset() {
+        this.form = {
+          configId: undefined,
+          configName: undefined,
+          configKey: undefined,
+          configValue: undefined,
+          configType: "1",
+          remark: undefined
+        };
+        this.resetForm("form");
+      },
+      // 取消按钮
+      cancel() {
+        this.open = false;
+        this.reset();
+      },
+      /** 新增按钮操作 */
+      handleAdd() {
+        this.reset();
+        this.open = true;
+        this.title = "添加参数";
+      },
+      /** 修改按钮操作 */
+      handleUpdate(row) {
+        this.reset();
+        const configId = row.configId || this.ids
+        getConfig(configId).then(response => {
+          this.form = response.data;
+          this.open = true;
+          this.title = "修改参数";
+        });
+      },
+      /** 提交按钮 */
+      submitForm: function () {
+        this.$refs["form"].validate(valid => {
+          if (valid) {
+            if (this.form.configId != undefined) {
+              updateConfig(this.form).then(response => {
+                this.$modal.msgSuccess("修改成功");
+                this.open = false;
+                this.getList();
+              });
+            } else {
+              addConfig(this.form).then(response => {
+                this.$modal.msgSuccess("新增成功");
+                this.open = false;
+                this.pageList();
+              });
+            }
+          }
+        });
       },
     }
   };

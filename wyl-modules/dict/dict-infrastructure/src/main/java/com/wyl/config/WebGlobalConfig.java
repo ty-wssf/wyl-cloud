@@ -10,7 +10,7 @@ import org.springframework.web.filter.CorsFilter;
  * @author wyl
  * @since 2021-11-23 09:30:53
  */
-@Configuration
+// @Configuration
 public class WebGlobalConfig {
 
     @Bean
