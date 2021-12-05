@@ -13,12 +13,13 @@ import '@/assets/styles/common.scss' // common css
 import App from './App'
 import store from './store'
 import router from './router'
+import plugins from './plugins' // plugins
 
 import '@/icons' // icon
 import '@/permission' // permission control
 
 // 重置表单
-import { parseTime, resetForm, addDateRange } from "@/utils/common";
+import {parseTime, resetForm, addDateRange} from "@/utils/common";
 // 分页组件
 import Pagination from "@/components/Pagination";
 // 字典数据组件
@@ -39,6 +40,7 @@ Vue.component('DictTag', DictTag)
 Vue.component('Pagination', Pagination)
 Vue.component('RightToolbar', RightToolbar)
 
+Vue.use(plugins)
 DictData.install()
 
 /**
@@ -50,12 +52,12 @@ DictData.install()
  * please remove it before going online ! ! !
  */
 if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
+  const {mockXHR} = require('../mock')
   mockXHR()
 }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, {locale})
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 

@@ -1,8 +1,8 @@
 package com.wyl.dict.web;
 
-import com.alibaba.cola.dto.MultiResponse;
-import com.wyl.api.IDictDataService;
-import com.wyl.dto.clientobject.DictDataCO;
+import cn.wyl.common.core.dto.MultiResponse;
+import com.wyl.dict.service.IDictDataService;
+import com.wyl.dict.dto.clientobject.DictDataCO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

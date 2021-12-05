@@ -1,12 +1,10 @@
 server:
   port: 9080
-  tomcat:
-    max-http-form-post-size: 10240
 # Spring
 spring:
   application:
     # 应用名称
-    name: dict
+    name: dict-service
   profiles:
     # 环境配置
     active: dev
@@ -24,6 +22,8 @@ spring:
         shared-configs:
           - mysql-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
           - mybatis-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+knife4j:
+  enable: true
 ---
 #mybatis
 #mybatis:

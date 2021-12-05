@@ -1,7 +1,7 @@
 package com.wyl.dict.web;
 
 import cn.hutool.core.collection.ListUtil;
-import com.alibaba.cola.dto.SingleResponse;
+import cn.wyl.common.core.dto.SingleResponse;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;

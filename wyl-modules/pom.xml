@@ -14,14 +14,8 @@
     <modules>
         <module>dict</module>
         <module>gateway</module>
+        <module>module-doc</module>
     </modules>
-
-    <properties>
-        <spring-boot.version>2.4.2</spring-boot.version>
-        <spring-cloud.version>2020.0.4</spring-cloud.version>
-        <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
-        <hutool.version>5.7.12</hutool.version>
-    </properties>
 
     <dependencies>
         <!-- bootstrap 启动器 -->
@@ -31,44 +25,25 @@
         </dependency>
     </dependencies>
 
-    <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
-            <!-- SpringBoot 依赖配置 -->
+            <!--Project modules-->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- SpringCloud 微服务 -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- SpringCloud Alibaba 微服务 -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
+                <groupId>com.wyl</groupId>
+                <artifactId>dict-adapter</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-core</artifactId>
-                <version>${hutool.version}</version>
+                <groupId>com.wyl</groupId>
+                <artifactId>dict-client</artifactId>
+                <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.wyl</groupId>
+                <artifactId>dict-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--Project modules End-->
         </dependencies>
     </dependencyManagement>
 

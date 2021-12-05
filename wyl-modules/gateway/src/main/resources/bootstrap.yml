@@ -4,17 +4,20 @@ server:
 spring:
   application:
     # 应用名称
-    name: gateway
+    name: gateway-service
   profiles:
     # 环境配置
     active: dev
   cloud:
     gateway:
-      routes:
-        - id: dict #设置路由id(理论上是可以随便写的)
-          uri: http://localhost:9080/ #http地址配置方式
-          predicates:
-            - Path=/dict/**,/config/**,/vue-admin-template/** #路径匹配规则
+      #routes:
+      #  - id: dict #设置路由id(理论上是可以随便写的)
+      #    uri: http://localhost:9080/ #http地址配置方式
+      #    predicates:
+      #      - Path=/dict/**,/config/**,/vue-admin-template/** #路径匹配规则
+      discovery:
+        locator:
+          enabled: true
     nacos:
       discovery:
         # 服务注册地址
@@ -27,5 +30,4 @@ spring:
         # 共享配置
         #shared-configs:
         #  - mysql-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
-
 
