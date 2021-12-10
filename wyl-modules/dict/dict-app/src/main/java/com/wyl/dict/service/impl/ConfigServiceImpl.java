@@ -1,11 +1,13 @@
 package com.wyl.dict.service.impl;
 
 import cn.wyl.common.core.catchlog.CatchAndLog;
+import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
 import cn.wyl.common.core.exception.Assert;
 import cn.wyl.common.core.exception.ExceptionFactory;
+import com.wyl.dict.dto.ConfigQry;
 import com.wyl.dict.gatewayimpl.database.dataobject.SysConfig;
 import com.wyl.dict.service.IConfigService;
 import com.wyl.dict.domain.gateway.ConfigGateway;
@@ -33,10 +35,10 @@ public class ConfigServiceImpl implements IConfigService {
     private ConfigGateway configGateway;
 
     @Override
-    public PageResponse<ConfigCO> pageSelectConfigList(ConfigPageQry qry) {
+    public PageResponse<ConfigCO> selectPageConfigList(ConfigPageQry qry) {
         SysConfig sysConfig = new SysConfig();
         BeanUtils.copyProperties(qry, sysConfig);
-        PageResponse<SysConfig> pageResponse = configGateway.pageSelectConfigList(sysConfig);
+        PageResponse<SysConfig> pageResponse = configGateway.selectPageBySelective(sysConfig);
         List<ConfigCO> configCOList = pageResponse.getData().stream()
                 .map(config -> {
                     ConfigCO configCO = new ConfigCO();
@@ -44,6 +46,19 @@ public class ConfigServiceImpl implements IConfigService {
                     return configCO;
                 }).collect(Collectors.toList());
         return PageResponse.of(configCOList, pageResponse.getTotalCount(), pageResponse.getPageSize(), pageResponse.getPageIndex());
+    }
+
+    @Override
+    public MultiResponse<ConfigCO> selectConfigList(ConfigQry qry) {
+        SysConfig sysConfig = new SysConfig();
+        BeanUtils.copyProperties(qry, sysConfig);
+        List<SysConfig> list = configGateway.selectAllBySelective(sysConfig);
+        List<ConfigCO> configCOList = list.stream().map(config -> {
+            ConfigCO configCO = new ConfigCO();
+            BeanUtils.copyProperties(config, configCO);
+            return configCO;
+        }).collect(Collectors.toList());
+        return MultiResponse.of(configCOList);
     }
 
     @Override

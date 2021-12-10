@@ -1,11 +1,14 @@
 package com.wyl.dict.web;
 
 import cn.wyl.common.core.catchlog.CatchAndLog;
+import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
+import cn.wyl.common.core.utils.poi.ExcelUtil;
 import cn.wyl.common.core.web.controller.BaseController;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.wyl.dict.dto.ConfigQry;
 import com.wyl.dict.service.IConfigService;
 import com.wyl.dict.dto.ConfigAddCmd;
 import com.wyl.dict.dto.ConfigEditCmd;
@@ -18,6 +21,9 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Api(tags = "配置管理模块")
 @CatchAndLog
@@ -33,14 +39,14 @@ public class ConfigController extends BaseController {
     @ApiOperation(value = "分页参数配置列表")
     @GetMapping("/pageList")
     public PageResponse<ConfigCO> pageList(ConfigPageQry qry) {
-        return configService.pageSelectConfigList(qry);
+        return configService.selectPageConfigList(qry);
     }
 
     @ApiOperationSupport(order = 2)
     @ApiOperation(value = "根据参数主键查询配置详情")
     @GetMapping(value = "/{configId}")
-    public SingleResponse<ConfigCO> getInfo(@ApiParam(value = "参数主键", required = true)
-                                            @PathVariable Long configId) {
+    public SingleResponse<ConfigCO> getConfig(@ApiParam(value = "参数主键", required = true)
+                                              @PathVariable Long configId) {
         return configService.getConfigInfo(configId);
     }
 
@@ -64,6 +70,15 @@ public class ConfigController extends BaseController {
     public Response removeConfig(@ApiParam(value = "参数主键", required = true)
                                  @PathVariable Long[] configIds) {
         return configService.removeConfig(configIds);
+    }
+
+    @ApiOperationSupport(order = 6)
+    @ApiOperation(value = "导出参数配置")
+    @RequestMapping("/export")
+    public void export(HttpServletResponse response, ConfigQry qry) {
+        MultiResponse<ConfigCO> list = configService.selectConfigList(qry);
+        ExcelUtil<ConfigCO> util = new ExcelUtil<ConfigCO>(ConfigCO.class);
+        util.exportExcel(response, list.getData(), "参数数据");
     }
     /* 基础接口结束 */
 

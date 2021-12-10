@@ -1,5 +1,7 @@
 package com.wyl.dict.dto.clientobject;
 
+import cn.wyl.common.core.utils.poi.Excel;
+import cn.wyl.common.core.utils.poi.Excel.ColumnType;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,6 +17,7 @@ public class ConfigCO implements Serializable {
     /**
      * 参数主键
      */
+    @Excel(name = "参数主键", cellType = ColumnType.NUMERIC)
     private Long configId;
 
     /**

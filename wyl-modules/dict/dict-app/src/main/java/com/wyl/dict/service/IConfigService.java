@@ -1,11 +1,13 @@
 package com.wyl.dict.service;
 
+import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
 import com.wyl.dict.dto.ConfigAddCmd;
 import com.wyl.dict.dto.ConfigEditCmd;
 import com.wyl.dict.dto.ConfigPageQry;
+import com.wyl.dict.dto.ConfigQry;
 import com.wyl.dict.dto.clientobject.ConfigCO;
 
 /**
@@ -14,7 +16,9 @@ import com.wyl.dict.dto.clientobject.ConfigCO;
  */
 public interface IConfigService {
 
-    PageResponse<ConfigCO> pageSelectConfigList(ConfigPageQry sysConfig);
+    PageResponse<ConfigCO> selectPageConfigList(ConfigPageQry sysConfig);
+
+    MultiResponse<ConfigCO> selectConfigList(ConfigQry sysConfig);
 
     SingleResponse<ConfigCO> getConfigInfo(Long configId);
 

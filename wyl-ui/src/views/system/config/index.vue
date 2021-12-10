@@ -91,24 +91,24 @@
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <!--<el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:config:edit']"
-          >修改</el-button>
+          >修改
+          </el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:config:remove']"
-          >删除</el-button>
+          >删除
+          </el-button>
         </template>
-      </el-table-column>-->
+      </el-table-column>
     </el-table>
 
     <pagination
@@ -155,7 +155,7 @@
 </template>
 
 <script>
-  import {pageList, addConfig} from "@/api/system/config";
+  import {pageList, getConfig, addConfig, editConfig, removeConfig} from "@/api/system/config";
 
   export default {
     name: "Config",
@@ -269,10 +269,10 @@
         this.$refs["form"].validate(valid => {
           if (valid) {
             if (this.form.configId != undefined) {
-              updateConfig(this.form).then(response => {
+              editConfig(this.form).then(response => {
                 this.$modal.msgSuccess("修改成功");
                 this.open = false;
-                this.getList();
+                this.pageList();
               });
             } else {
               addConfig(this.form).then(response => {
@@ -283,6 +283,23 @@
             }
           }
         });
+      },
+      /** 删除按钮操作 */
+      handleDelete(row) {
+        const configIds = row.configId || this.ids;
+        this.$modal.confirm('是否确认删除参数编号为"' + configIds + '"的数据项？').then(function () {
+          return removeConfig(configIds);
+        }).then(() => {
+          this.pageList();
+          this.$modal.msgSuccess("删除成功");
+        }).catch(() => {
+        });
+      },
+      /** 导出按钮操作 */
+      handleExport() {
+        this.download('system/config/export', {
+          ...this.queryParams
+        }, `config_${new Date().getTime()}.xlsx`)
       },
     }
   };

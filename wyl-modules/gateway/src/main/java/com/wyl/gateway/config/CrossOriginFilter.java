@@ -16,7 +16,7 @@ public class CrossOriginFilter {
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedMethod(HttpMethod.POST);
+        config.addAllowedMethod("*");
         config.addAllowedOrigin("*");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

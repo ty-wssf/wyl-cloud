@@ -25,11 +25,16 @@ public class ConfigGatewayImpl implements ConfigGateway {
     private SysConfigMapper configMapper;
 
     @Override
-    public PageResponse<SysConfig> pageSelectConfigList(SysConfig sysConfig) {
-        PageHelper.startPage(sysConfig.getPageIndex(), sysConfig.getPageSize());
-        List<SysConfig> configList = configMapper.selectAllBySelective(sysConfig);
+    public PageResponse<SysConfig> selectPageBySelective(SysConfig record) {
+        PageHelper.startPage(record.getPageIndex(), record.getPageSize());
+        List<SysConfig> configList = configMapper.selectAllBySelective(record);
         PageInfo<SysConfig> pageInfo = new PageInfo<SysConfig>(configList);
         return PageResponse.of(pageInfo.getList(), (int) pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getPageNum());
+    }
+
+    @Override
+    public List<SysConfig> selectAllBySelective(SysConfig record) {
+        return configMapper.selectAllBySelective(record);
     }
 
     @Override
