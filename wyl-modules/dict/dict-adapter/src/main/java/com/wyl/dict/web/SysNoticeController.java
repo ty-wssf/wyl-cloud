@@ -3,24 +3,25 @@ package com.wyl.dict.web;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
-import com.wyl.dict.service.SysNoticeService;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.wyl.dict.dto.clientobject.SysNoticeCO;
-import com.wyl.dict.dto.qry.SysNoticePageQry;
 import com.wyl.dict.dto.command.SysNoticeAddCommand;
 import com.wyl.dict.dto.command.SysNoticeEditCommand;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.validation.annotation.Validated;
-import javax.annotation.Resource;
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.wyl.dict.dto.qry.SysNoticePageQry;
+import com.wyl.dict.service.SysNoticeService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * 通知公告表(SysNotice)表控制层
  *
  * @author wyl
- * @since 2021-12-15 09:07:42
+ * @since 2021-12-15 09:41:50
  */
 @Api(tags = "通知公告表模块")
 @RestController
@@ -44,7 +45,7 @@ public class SysNoticeController {
     @ApiOperation(value = "根据主键查询详情")
     @GetMapping(value = "/{id}")
     public SingleResponse<SysNoticeCO> getInfo(@ApiParam(value = "主键", required = true)
-                                            @PathVariable Integer id) {
+                                               @PathVariable Integer id) {
         return this.sysNoticeService.queryByPrimaryKey(id);
     }
 
@@ -58,16 +59,16 @@ public class SysNoticeController {
     @ApiOperationSupport(order = 4)
     @ApiOperation(value = "编辑")
     @PutMapping("{id}")
-    public Response editConfig(@Validated @RequestBody SysNoticeEditCommand command, @PathVariable Integer id) {
-                    command.setNoticeId(id);
-                return this.sysNoticeService.update(command);
+    public Response edit(@Validated @RequestBody SysNoticeEditCommand command, @PathVariable Integer id) {
+        command.setNoticeId(id);
+        return this.sysNoticeService.update(command);
     }
 
     @ApiOperationSupport(order = 5)
     @ApiOperation(value = "删除")
     @DeleteMapping("/{ids}")
-    public Response removeConfig(@ApiParam(value = "主键", required = true)
-                                 @PathVariable Integer[] ids) {
+    public Response remove(@ApiParam(value = "主键", required = true)
+                           @PathVariable Integer[] ids) {
         return this.sysNoticeService.deleteByPrimaryKeys(ids);
     }
     /* 基础接口结束 */
