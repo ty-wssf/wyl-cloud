@@ -10,11 +10,13 @@ import com.wyl.dict.domain.gateway.SysNoticeGateway;
 import com.wyl.dict.service.SysNoticeService;
 import org.springframework.stereotype.Service;
 import cn.hutool.core.bean.BeanUtil;
+
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
 import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
@@ -39,7 +41,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      */
     @Override
     public SingleResponse<SysNoticeCO> queryByPrimaryKey(Integer primaryKey) {
-        SysNotice sysNotice = this.sysNoticeGateway.queryByPrimaryKey(primaryKey);  
+        SysNotice sysNotice = this.sysNoticeGateway.queryByPrimaryKey(primaryKey);
         SysNoticeCO sysNoticeCO = new SysNoticeCO();
         BeanUtil.copyProperties(sysNotice, sysNoticeCO);
         return SingleResponse.of(sysNoticeCO);
@@ -53,14 +55,17 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      */
     @Override
     public MultiResponse<SysNoticeCO> queryAll(SysNoticeQry qry) {
-        SysNotice sysNotice = new SysNotice();
-        BeanUtil.copyProperties(qry, sysNotice);
-        List<SysNotice> list = this.sysNoticeGateway.queryAll(sysNotice);
-        List<SysNoticeCO> coList = new ArrayList<>();
-        BeanUtil.copyProperties(list, coList);
-        return MultiResponse.of(coList);
+        SysNotice sysNoticeDO = new SysNotice();
+        BeanUtil.copyProperties(qry, sysNoticeDO);
+        List<SysNotice> sysNoticeList = this.sysNoticeGateway.queryAll(sysNoticeDO);
+        List<SysNoticeCO> sysNoticeCOList = sysNoticeList.stream().map(sysNotice -> {
+            SysNoticeCO sysNoticeCO = new SysNoticeCO();
+            BeanUtil.copyProperties(sysNotice, sysNoticeCO);
+            return sysNoticeCO;
+        }).collect(Collectors.toList());
+        return MultiResponse.of(sysNoticeCOList);
     }
-    
+
     /**
      * 通过实体作为筛选条件查询
      *

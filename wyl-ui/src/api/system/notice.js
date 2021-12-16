@@ -29,9 +29,9 @@ export function add(data) {
 }
 
 // 编辑
-export function edit(data) {
+export function edit(id, data) {
   return request({
-    url: baseUrl,
+    url: baseUrl + '/' + id,
     method: 'put',
     data: data
   })

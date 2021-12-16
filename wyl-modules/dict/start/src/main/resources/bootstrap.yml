@@ -5,6 +5,11 @@ spring:
   application:
     # 应用名称
     name: dict-service
+  jackson:
+    # #这个是时区，一定要加，否则会默认为格林尼治时间，即少8小时
+    time-zone: GMT+8
+    # #时间戳统一转换
+    date-format: yyyy-MM-dd HH:mm:ss
   profiles:
     # 环境配置
     active: dev

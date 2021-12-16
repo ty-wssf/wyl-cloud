@@ -18,6 +18,8 @@ import plugins from './plugins' // plugins
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import {download} from '@/utils/request'
+
 // 重置表单
 import {parseTime, resetForm, addDateRange} from "@/utils/common";
 // 分页组件
@@ -33,6 +35,7 @@ import RightToolbar from "@/components/RightToolbar"
 Vue.prototype.parseTime = parseTime
 Vue.prototype.resetForm = resetForm
 Vue.prototype.addDateRange = addDateRange
+Vue.prototype.download = download
 
 // 全局组件挂载
 // 分页组件

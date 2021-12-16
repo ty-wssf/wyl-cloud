@@ -82,7 +82,7 @@ public class SysNoticeController {
     public void export(HttpServletResponse response, SysNoticeQry qry) {
         MultiResponse<SysNoticeCO> list = sysNoticeService.queryAll(qry);
         ExcelUtil<SysNoticeCO> util = new ExcelUtil<SysNoticeCO>(SysNoticeCO.class);
-        util.exportExcel(response, list.getData(), "通知公告表数据");
+        util.exportExcel(response, list.getData(), "通知公告数据");
     }
     /* 基础接口结束 */
 

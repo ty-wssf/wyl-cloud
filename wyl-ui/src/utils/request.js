@@ -1,7 +1,9 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import {MessageBox, Message, Loading} from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import {getToken} from '@/utils/auth'
+import {saveAs} from 'file-saver'
+import {tansParams, blobValidate} from "@/utils/common";
 
 // create an axios instance
 const service = axios.create({
@@ -35,7 +37,7 @@ service.interceptors.response.use(
   /**
    * If you want to get http information such as headers or status
    * Please return  response => response
-  */
+   */
 
   /**
    * Determine the request status by custom code
@@ -45,10 +47,15 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
+    // 二进制数据则直接返回
+    if (response.request.responseType === 'blob' || response.request.responseType === 'arraybuffer') {
+      return response.data
+    }
+
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000 && !res.success) {
       Message({
-        message: res.message || res.errMessage ||'Error',
+        message: res.message || res.errMessage || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
@@ -81,5 +88,36 @@ service.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
+let downloadLoadingInstance;
+
+// 通用下载方法
+export function download(url, params, filename) {
+  downloadLoadingInstance = Loading.service({
+    text: "正在下载数据，请稍候",
+    spinner: "el-icon-loading",
+    background: "rgba(0, 0, 0, 0.7)",
+  })
+  return service.post(url, params, {
+    transformRequest: [(params) => {
+      return tansParams(params)
+    }],
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    responseType: 'blob'
+  }).then(async (data) => {
+    const isLogin = await blobValidate(data);
+    if (isLogin) {
+      const blob = new Blob([data])
+      saveAs(blob, filename)
+    } else {
+      Message.error('无效的会话，或者会话已过期，请重新登录。');
+    }
+    downloadLoadingInstance.close();
+  }).catch((r) => {
+    console.error(r)
+    Message.error('下载文件出现错误，请联系管理员！')
+    downloadLoadingInstance.close();
+  })
+}
 
 export default service
