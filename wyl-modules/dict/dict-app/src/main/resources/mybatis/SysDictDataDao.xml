@@ -4,33 +4,19 @@
 
     <resultMap type="com.wyl.dict.gatewayimpl.database.dataobject.SysDictData" id="SysDictDataMap">
         <result property="dictCode" column="dict_code" jdbcType="INTEGER"/>
-        {sqlType=bigint, jdbcType=INTEGER}
         <result property="dictSort" column="dict_sort" jdbcType="INTEGER"/>
-        {sqlType=int, jdbcType=INTEGER}
         <result property="dictLabel" column="dict_label" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="dictValue" column="dict_value" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="dictType" column="dict_type" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="cssClass" column="css_class" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="listClass" column="list_class" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="isDefault" column="is_default" jdbcType="VARCHAR"/>
-        {sqlType=char, jdbcType=VARCHAR}
         <result property="status" column="status" jdbcType="VARCHAR"/>
-        {sqlType=char, jdbcType=VARCHAR}
         <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        {sqlType=datetime, jdbcType=TIMESTAMP}
         <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-        {sqlType=datetime, jdbcType=TIMESTAMP}
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
     </resultMap>
 
     <!--查询单个-->

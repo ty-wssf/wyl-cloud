@@ -4,23 +4,14 @@
 
     <resultMap type="com.wyl.dict.gatewayimpl.database.dataobject.SysDictType" id="SysDictTypeMap">
         <result property="dictId" column="dict_id" jdbcType="INTEGER"/>
-        {sqlType=bigint, jdbcType=INTEGER}
         <result property="dictName" column="dict_name" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="dictType" column="dict_type" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="status" column="status" jdbcType="VARCHAR"/>
-        {sqlType=char, jdbcType=VARCHAR}
         <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        {sqlType=datetime, jdbcType=TIMESTAMP}
         <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-        {sqlType=datetime, jdbcType=TIMESTAMP}
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
-        {sqlType=varchar, jdbcType=VARCHAR}
     </resultMap>
 
     <!--查询单个-->

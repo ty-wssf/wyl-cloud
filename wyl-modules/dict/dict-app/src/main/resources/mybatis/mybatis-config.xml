@@ -13,8 +13,8 @@
 
     <mappers>
         <mapper resource="mybatis/SysConfigDao.xml"/>
-        <mapper resource="mybatis/SysDictTypeMapper.xml"/>
-        <mapper resource="mybatis/SysDictDataMapper.xml"/>
+        <mapper resource="mybatis/SysDictTypeDao.xml"/>
+        <mapper resource="mybatis/SysDictDataDao.xml"/>
         <mapper resource="mybatis/SysNoticeDao.xml"/>
     </mappers>
 
