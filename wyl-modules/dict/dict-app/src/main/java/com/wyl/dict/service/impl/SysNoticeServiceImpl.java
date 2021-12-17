@@ -1,34 +1,37 @@
 package com.wyl.dict.service.impl;
 
-import com.wyl.dict.gatewayimpl.database.dataobject.SysNotice;
-import com.wyl.dict.dto.clientobject.SysNoticeCO;
-import com.wyl.dict.dto.qry.SysNoticeQry;
-import com.wyl.dict.dto.qry.SysNoticePageQry;
-import com.wyl.dict.dto.command.SysNoticeAddCommand;
-import com.wyl.dict.dto.command.SysNoticeEditCommand;
-import com.wyl.dict.domain.gateway.SysNoticeGateway;
-import com.wyl.dict.service.SysNoticeService;
-import org.springframework.stereotype.Service;
 import cn.hutool.core.bean.BeanUtil;
-
-import javax.annotation.Resource;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
+import cn.wyl.common.core.catchlog.CatchAndLog;
 import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
+import com.wyl.dict.domain.gateway.SysNoticeGateway;
+import com.wyl.dict.dto.clientobject.SysNoticeCO;
+import com.wyl.dict.dto.command.SysNoticeAddCommand;
+import com.wyl.dict.dto.command.SysNoticeEditCommand;
+import com.wyl.dict.dto.qry.SysNoticePageQry;
+import com.wyl.dict.dto.qry.SysNoticeQry;
+import com.wyl.dict.gatewayimpl.database.dataobject.SysNotice;
+import com.wyl.dict.service.SysNoticeService;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 通知公告表(SysNotice)表服务实现类
  *
  * @author wyl
- * @since 2021-12-15 09:07:25
+ * @since 2021-12-17 09:08:56
  */
+@Validated
 @Service
+@CatchAndLog
 public class SysNoticeServiceImpl implements SysNoticeService {
     @Resource
     private SysNoticeGateway sysNoticeGateway;
@@ -57,7 +60,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
     public MultiResponse<SysNoticeCO> queryAll(SysNoticeQry qry) {
         SysNotice sysNoticeDO = new SysNotice();
         BeanUtil.copyProperties(qry, sysNoticeDO);
-        List<SysNotice> sysNoticeList = this.sysNoticeGateway.queryAll(sysNoticeDO);
+        List<SysNotice> sysNoticeList = sysNoticeGateway.queryAll(sysNoticeDO);
         List<SysNoticeCO> sysNoticeCOList = sysNoticeList.stream().map(sysNotice -> {
             SysNoticeCO sysNoticeCO = new SysNoticeCO();
             BeanUtil.copyProperties(sysNotice, sysNoticeCO);
@@ -93,7 +96,7 @@ public class SysNoticeServiceImpl implements SysNoticeService {
      * @return 是否成功
      */
     @Override
-    public Response insert(SysNoticeAddCommand command) {
+    public Response insert(@Valid SysNoticeAddCommand command) {
         SysNotice sysNotice = new SysNotice();
         BeanUtil.copyProperties(command, sysNotice);
         this.sysNoticeGateway.insert(sysNotice);

@@ -10,13 +10,15 @@ import cn.wyl.common.core.dto.SingleResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.MultiResponse;
+
 import java.util.List;
+import javax.validation.Valid;
 
 /**
  * 通知公告表(SysNotice)表服务接口
  *
  * @author wyl
- * @since 2021-12-15 09:07:25
+ * @since 2021-12-17 09:08:55
  */
 public interface SysNoticeService {
 
@@ -27,7 +29,7 @@ public interface SysNoticeService {
      * @return 响应对象
      */
     SingleResponse<SysNoticeCO> queryByPrimaryKey(Integer primaryKey);
-    
+
     /**
      * 通过实体作为筛选条件查询
      *
@@ -35,7 +37,7 @@ public interface SysNoticeService {
      * @return 对象列表
      */
     MultiResponse<SysNoticeCO> queryAll(SysNoticeQry qry);
-    
+
     /**
      * 通过实体作为筛选条件查询
      *
@@ -43,14 +45,14 @@ public interface SysNoticeService {
      * @return 对象列表
      */
     PageResponse<SysNoticeCO> queryPage(SysNoticePageQry pageQry);
-    
+
     /**
      * 新增数据
      *
      * @param command 实例对象
      * @return 是否成功
      */
-    Response insert(SysNoticeAddCommand command);
+    Response insert(@Valid SysNoticeAddCommand command);
 
     /**
      * 修改数据
