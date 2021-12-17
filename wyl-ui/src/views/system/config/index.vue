@@ -60,17 +60,6 @@
         >新增
         </el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="el-icon-edit"
-          size="mini"
-          :disabled="single"
-          @click="handleUpdate"
-        >修改
-        </el-button>
-      </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="pageList"></right-toolbar>
     </el-row>
 
@@ -155,7 +144,7 @@
 </template>
 
 <script>
-  import {pageList, getConfig, addConfig, editConfig, removeConfig} from "@/api/system/config";
+  import {pageList, getInfo, add, edit, remove} from "@/api/system/config";
 
   export default {
     name: "Config",
@@ -258,7 +247,7 @@
       handleUpdate(row) {
         this.reset();
         const configId = row.configId || this.ids
-        getConfig(configId).then(response => {
+        getInfo(configId).then(response => {
           this.form = response.data;
           this.open = true;
           this.title = "修改参数";
@@ -269,13 +258,13 @@
         this.$refs["form"].validate(valid => {
           if (valid) {
             if (this.form.configId != undefined) {
-              editConfig(this.form).then(response => {
+              edit(this.form.configId, this.form).then(response => {
                 this.$modal.msgSuccess("修改成功");
                 this.open = false;
                 this.pageList();
               });
             } else {
-              addConfig(this.form).then(response => {
+              add(this.form).then(response => {
                 this.$modal.msgSuccess("新增成功");
                 this.open = false;
                 this.pageList();
@@ -286,9 +275,10 @@
       },
       /** 删除按钮操作 */
       handleDelete(row) {
+        debugger
         const configIds = row.configId || this.ids;
         this.$modal.confirm('是否确认删除参数编号为"' + configIds + '"的数据项？').then(function () {
-          return removeConfig(configIds);
+          return remove(configIds);
         }).then(() => {
           this.pageList();
           this.$modal.msgSuccess("删除成功");

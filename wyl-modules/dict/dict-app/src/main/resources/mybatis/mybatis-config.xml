@@ -12,7 +12,7 @@
     </plugins>
 
     <mappers>
-        <mapper resource="mybatis/SysConfigMapper.xml"/>
+        <mapper resource="mybatis/SysConfigDao.xml"/>
         <mapper resource="mybatis/SysDictTypeMapper.xml"/>
         <mapper resource="mybatis/SysDictDataMapper.xml"/>
         <mapper resource="mybatis/SysNoticeDao.xml"/>

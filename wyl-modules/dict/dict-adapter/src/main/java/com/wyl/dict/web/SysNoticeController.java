@@ -5,6 +5,7 @@ import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
 import cn.wyl.common.core.utils.poi.ExcelUtil;
+import cn.wyl.common.core.web.controller.BaseController;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.wyl.dict.dto.clientobject.SysNoticeCO;
 import com.wyl.dict.dto.command.SysNoticeAddCommand;
@@ -30,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 @Api(tags = "通知公告表模块")
 @RestController
 @RequestMapping("sysNotice")
-public class SysNoticeController {
+public class SysNoticeController extends BaseController {
     /**
      * 服务对象
      */

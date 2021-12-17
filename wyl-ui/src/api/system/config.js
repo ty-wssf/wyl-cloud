@@ -1,47 +1,46 @@
 import request from '@/utils/request'
 
-const baseUrl = '/dict-service'
+const baseUrl = '/dict-service/sysConfig'
 
-// 查询参数列表
+// 分页列表
 export function pageList(query) {
   return request({
-    url: baseUrl + '/config/pageList',
+    url: baseUrl + '/pageList',
     method: 'get',
     params: query
   })
 }
 
-// 查询参数详细
-export function getConfig(configId) {
+// 根据主键查询详情
+export function getInfo(id) {
   return request({
-    url: baseUrl + '/config/' + configId,
+    url: baseUrl + '/' + id,
     method: 'get'
   })
 }
 
-// 新增参数配置
-export function addConfig(data) {
+// 新增
+export function add(data) {
   return request({
-    url: baseUrl + '/config',
+    url: baseUrl,
     method: 'post',
     data: data
   })
 }
 
-// 编辑参数配置
-export function editConfig(data) {
+// 编辑
+export function edit(id, data) {
   return request({
-    url: baseUrl + '/config',
+    url: baseUrl + '/' + id,
     method: 'put',
     data: data
   })
 }
 
-// 删除参数配置
-export function removeConfig(configId) {
-  debugger
+// 删除
+export function remove(id) {
   return request({
-    url: baseUrl + '/config/' + configId,
+    url: baseUrl + '/' + id,
     method: 'delete'
   })
 }
