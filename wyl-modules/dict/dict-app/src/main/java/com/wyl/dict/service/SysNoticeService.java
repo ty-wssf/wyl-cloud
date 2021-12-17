@@ -1,17 +1,15 @@
 package com.wyl.dict.service;
 
-import com.wyl.dict.gatewayimpl.database.dataobject.SysNotice;
+import cn.wyl.common.core.dto.MultiResponse;
+import cn.wyl.common.core.dto.PageResponse;
+import cn.wyl.common.core.dto.Response;
+import cn.wyl.common.core.dto.SingleResponse;
 import com.wyl.dict.dto.clientobject.SysNoticeCO;
-import com.wyl.dict.dto.qry.SysNoticeQry;
-import com.wyl.dict.dto.qry.SysNoticePageQry;
 import com.wyl.dict.dto.command.SysNoticeAddCommand;
 import com.wyl.dict.dto.command.SysNoticeEditCommand;
-import cn.wyl.common.core.dto.SingleResponse;
-import cn.wyl.common.core.dto.Response;
-import cn.wyl.common.core.dto.PageResponse;
-import cn.wyl.common.core.dto.MultiResponse;
+import com.wyl.dict.dto.qry.SysNoticePageQry;
+import com.wyl.dict.dto.qry.SysNoticeQry;
 
-import java.util.List;
 import javax.validation.Valid;
 
 /**
