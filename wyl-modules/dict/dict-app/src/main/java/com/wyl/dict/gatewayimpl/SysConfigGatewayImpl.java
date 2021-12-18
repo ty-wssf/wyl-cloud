@@ -71,7 +71,7 @@ public class SysConfigGatewayImpl implements SysConfigGateway {
      */
     @Override
     public PageResponse<SysConfig> queryPage(SysConfig sysConfig) {
-        PageHelper.startPage(sysConfig.getPageIndex(), sysConfig.getPageSize());
+        PageHelper.startPage(sysConfig.getPageQuery().getPageIndex(), sysConfig.getPageQuery().getPageSize());
         List<SysConfig> list = sysConfigDao.queryAll(sysConfig);
         PageInfo<SysConfig> pageInfo = new PageInfo<SysConfig>(list);
         return PageResponse.of(pageInfo.getList(), (int) pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getPageNum());

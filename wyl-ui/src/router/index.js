@@ -182,7 +182,7 @@ export const constantRoutes = [
       },
       {
         path: 'dict',
-        component: () => import('@/views/system/dict/index'),
+        component: () => import('@/views/system/dict/type/index'),
         name: '字典管理',
         meta: {title: '字典管理'}
       },

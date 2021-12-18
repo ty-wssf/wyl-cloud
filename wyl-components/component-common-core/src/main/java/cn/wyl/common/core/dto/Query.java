@@ -1,6 +1,8 @@
 package cn.wyl.common.core.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +12,8 @@ import java.util.Map;
  *
  * @author Frank Zhang 2020.11.13
  */
-@Data
+@Setter
+@Getter
 public abstract class Query extends Command {
 
     private static final long serialVersionUID = 1L;
@@ -18,6 +21,6 @@ public abstract class Query extends Command {
     /**
      * 请求参数
      */
-    private Map<String, Object> params = new HashMap<>();
+    private Map<String, Object> params;
 
 }

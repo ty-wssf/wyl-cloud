@@ -1,30 +1,25 @@
 package cn.wyl.common.core.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.util.Map;
+
 /**
  * Page Query Param
  *
  * @author jacky
  */
-public abstract class PageQuery extends Query {
+public class PageQuery extends Query {
     private static final long serialVersionUID = 1L;
-
-    public static final String ASC = "ASC";
-
-    public static final String DESC = "DESC";
 
     private static final int DEFAULT_PAGE_SIZE = 10;
 
+    @ApiModelProperty(value = "每页显示多少条")
     private int pageSize = DEFAULT_PAGE_SIZE;
 
+    @ApiModelProperty(value = "页索引")
     private int pageIndex = 1;
-
-    private String orderBy;
-
-    private String orderDirection = DESC;
-
-    private String groupBy;
-
-    private boolean needTotalCount = true;
 
     public int getPageIndex() {
         if (pageIndex < 1) {
@@ -53,44 +48,14 @@ public abstract class PageQuery extends Query {
         return this;
     }
 
+    @ApiModelProperty(hidden = true)
     public int getOffset() {
         return (getPageIndex() - 1) * getPageSize();
     }
 
-    public String getOrderBy() {
-        return orderBy;
-    }
-
-    public PageQuery setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
-        return this;
-    }
-
-    public String getOrderDirection() {
-        return orderDirection;
-    }
-
-    public PageQuery setOrderDirection(String orderDirection) {
-        if (ASC.equalsIgnoreCase(orderDirection) || DESC.equalsIgnoreCase(orderDirection)) {
-            this.orderDirection = orderDirection;
-        }
-        return this;
-    }
-
-    public String getGroupBy() {
-        return groupBy;
-    }
-
-    public void setGroupBy(String groupBy) {
-        this.groupBy = groupBy;
-    }
-
-    public boolean isNeedTotalCount() {
-        return needTotalCount;
-    }
-
-    public void setNeedTotalCount(boolean needTotalCount) {
-        this.needTotalCount = needTotalCount;
+    @ApiModelProperty(hidden = true)
+    public Map<String, Object> getParams() {
+        return getParams();
     }
 
 }

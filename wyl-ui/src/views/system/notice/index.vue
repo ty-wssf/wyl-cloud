@@ -40,7 +40,7 @@
         >新增
         </el-button>
       </el-col>
-      <el-col :span="1.5">
+      <!--<el-col :span="1.5">
         <el-button
           type="warning"
           plain
@@ -49,7 +49,7 @@
           @click="handleExport"
         >导出
         </el-button>
-      </el-col>
+      </el-col>-->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="pageList"></right-toolbar>
     </el-row>
     <!-- table区域 -->
@@ -93,8 +93,8 @@
     <pagination
       v-show="total>0"
       :total="total"
-      :page.sync="queryParams.pageNum"
-      :limit.sync="queryParams.pageSize"
+      :page.sync="queryParams.pageQuery.pageNum"
+      :limit.sync="queryParams.pageQuery.pageSize"
       @pagination="pageList"
     />
 
@@ -176,8 +176,10 @@
         dateRange: [],
         // 查询参数
         queryParams: {
-          pageNum: 1,
-          pageSize: 10
+          pageQuery: {
+            pageIndex: 1,
+            pageSize: 10,
+          }
         },
         // 表单参数
         form: {

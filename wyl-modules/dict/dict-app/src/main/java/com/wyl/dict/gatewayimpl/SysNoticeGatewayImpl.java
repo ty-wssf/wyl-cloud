@@ -9,6 +9,7 @@ import cn.wyl.common.core.dto.PageResponse;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -20,10 +21,10 @@ import java.util.List;
  */
 @Component
 public class SysNoticeGatewayImpl implements SysNoticeGateway {
-       
+
     @Resource
     private SysNoticeDao sysNoticeDao;
-    
+
     /**
      * 通过ID查询单条数据
      *
@@ -47,7 +48,7 @@ public class SysNoticeGatewayImpl implements SysNoticeGateway {
     public List<SysNotice> queryAll(SysNotice sysNotice) {
         return this.sysNoticeDao.queryAll(sysNotice);
     }
-    
+
     /**
      * 通过实体作为筛选条件查询
      *
@@ -56,12 +57,12 @@ public class SysNoticeGatewayImpl implements SysNoticeGateway {
      */
     @Override
     public PageResponse<SysNotice> queryPage(SysNotice sysNotice) {
-        PageHelper.startPage(sysNotice.getPageIndex(), sysNotice.getPageSize());
+        PageHelper.startPage(sysNotice.getPageQuery().getPageIndex(), sysNotice.getPageQuery().getPageSize());
         List<SysNotice> list = sysNoticeDao.queryAll(sysNotice);
         PageInfo<SysNotice> pageInfo = new PageInfo<SysNotice>(list);
         return PageResponse.of(pageInfo.getList(), (int) pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getPageNum());
     }
-    
+
     /**
      * 新增数据
      *
@@ -105,7 +106,7 @@ public class SysNoticeGatewayImpl implements SysNoticeGateway {
     public void update(SysNotice sysNotice) {
         Assert.isTrue(sysNoticeDao.update(sysNotice) > 0, "编辑对象不存在");
     }
-    
+
     /**
      * 通过主键删除数据
      *
@@ -116,5 +117,5 @@ public class SysNoticeGatewayImpl implements SysNoticeGateway {
     public void deleteByPrimaryKey(Integer primaryKey) {
         Assert.isTrue(sysNoticeDao.deleteByPrimaryKey(primaryKey) > 0, "删除对象不存在");
     }
-    
+
 }

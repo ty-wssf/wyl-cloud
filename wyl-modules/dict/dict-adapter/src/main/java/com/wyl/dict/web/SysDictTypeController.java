@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiOperation;
  */
 @Api(tags = "字典类型表模块")
 @RestController
-@RequestMapping("sysDictType")
+@RequestMapping("dict/type")
 public class SysDictTypeController extends BaseController {
     /**
      * 服务对象

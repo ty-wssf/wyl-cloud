@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BaseEntity extends PageQuery implements Serializable {
+public class BaseEntity implements Serializable {
 
     /**
      * 创建者
@@ -39,10 +39,12 @@ public class BaseEntity extends PageQuery implements Serializable {
      */
     private String remark;
 
+    private PageQuery pageQuery;
+
     /**
      * 请求参数
      */
-    private Map<String, Object> params = new HashMap<>();
+    private Map<String, Object> params;
 
     public String getCreateBy() {
         return createBy;
@@ -89,6 +91,15 @@ public class BaseEntity extends PageQuery implements Serializable {
     }
 
     public void setParams(Map<String, Object> params) {
-        this.params = (params == null ? new HashMap<>() : params);
+        this.params = params;
     }
+
+    public PageQuery getPageQuery() {
+        return pageQuery;
+    }
+
+    public void setPageQuery(PageQuery pageQuery) {
+        this.pageQuery = pageQuery;
+    }
+
 }

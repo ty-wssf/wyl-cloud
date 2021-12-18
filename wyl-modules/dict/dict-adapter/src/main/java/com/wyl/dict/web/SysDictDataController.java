@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiOperation;
  */
 @Api(tags = "字典数据表模块")
 @RestController
-@RequestMapping("sysDictData")
+@RequestMapping("dict/data")
 public class SysDictDataController extends BaseController {
     /**
      * 服务对象

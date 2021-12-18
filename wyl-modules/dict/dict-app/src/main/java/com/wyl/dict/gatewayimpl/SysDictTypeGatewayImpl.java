@@ -71,7 +71,7 @@ public class SysDictTypeGatewayImpl implements SysDictTypeGateway {
      */
     @Override
     public PageResponse<SysDictType> queryPage(SysDictType sysDictType) {
-        PageHelper.startPage(sysDictType.getPageIndex(), sysDictType.getPageSize());
+        PageHelper.startPage(sysDictType.getPageQuery().getPageIndex(), sysDictType.getPageQuery().getPageSize());
         List<SysDictType> list = sysDictTypeDao.queryAll(sysDictType);
         PageInfo<SysDictType> pageInfo = new PageInfo<SysDictType>(list);
         return PageResponse.of(pageInfo.getList(), (int) pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getPageNum());

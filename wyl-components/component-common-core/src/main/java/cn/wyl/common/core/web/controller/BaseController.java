@@ -1,5 +1,6 @@
 package cn.wyl.common.core.web.controller;
 
+import cn.wyl.common.core.dto.PageQuery;
 import com.alibaba.fastjson.JSON;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -22,6 +23,14 @@ public class BaseController {
             @Override
             public void setAsText(String text) {
                 setValue(JSON.parseObject(text, Map.class));
+            }
+        });
+
+        // PageQuery
+        binder.registerCustomEditor(PageQuery.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                setValue(JSON.parseObject(text, PageQuery.class));
             }
         });
     }

@@ -2,10 +2,9 @@ package com.wyl.dict.api;
 
 import cn.wyl.common.core.dto.MultiResponse;
 import com.wyl.dict.api.factory.RemoteDictFallbackFactory;
-import com.wyl.dict.dto.clientobject.DictDataCO;
+import com.wyl.dict.dto.clientobject.SysDictDataCO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(contextId = "remoteDictService", value = "dict", fallbackFactory = RemoteDictFallbackFactory.class)
 public interface RemoteDictService {
@@ -17,6 +16,6 @@ public interface RemoteDictService {
      * @return
      */
     @GetMapping(value = "/dict/data/type/{dictType}")
-    MultiResponse<DictDataCO> selectDictDataByType(String dictType);
+    MultiResponse<SysDictDataCO> selectDictDataByType(String dictType);
 
 }

@@ -71,7 +71,7 @@ public class SysDictDataGatewayImpl implements SysDictDataGateway {
      */
     @Override
     public PageResponse<SysDictData> queryPage(SysDictData sysDictData) {
-        PageHelper.startPage(sysDictData.getPageIndex(), sysDictData.getPageSize());
+        PageHelper.startPage(sysDictData.getPageQuery().getPageIndex(), sysDictData.getPageQuery().getPageSize());
         List<SysDictData> list = sysDictDataDao.queryAll(sysDictData);
         PageInfo<SysDictData> pageInfo = new PageInfo<SysDictData>(list);
         return PageResponse.of(pageInfo.getList(), (int) pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getPageNum());
