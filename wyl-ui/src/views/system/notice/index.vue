@@ -212,12 +212,11 @@
       },
       /** 搜索按钮操作 */
       handleQuery() {
-        this.queryParams.pageNum = 1;
+        this.queryParams.pageQuery.pageNum = 1;
         this.pageList();
       },
       /** 重置按钮操作 */
       resetQuery() {
-        this.dateRange = [];
         this.resetForm("queryForm");
         this.handleQuery();
       },

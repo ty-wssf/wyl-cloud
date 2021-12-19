@@ -1,11 +1,13 @@
 package cn.wyl.common.core.web.domain;
 
+import cn.hutool.core.map.MapUtil;
 import cn.wyl.common.core.dto.PageQuery;
 import cn.wyl.common.core.mybatis.CreatedOnFuncation;
 import cn.wyl.common.core.mybatis.UpdatedOnFuncation;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -87,7 +89,7 @@ public class BaseEntity implements Serializable {
     }
 
     public Map<String, Object> getParams() {
-        return params;
+        return params == null ? Collections.emptyMap() : params;
     }
 
     public void setParams(Map<String, Object> params) {

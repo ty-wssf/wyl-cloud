@@ -38,7 +38,7 @@
                 and dict_sort = #{dictSort}
             </if>
             <if test="dictLabel != null and dictLabel != ''">
-                and dict_label = #{dictLabel}
+                and dict_label like concat('%', #{dictLabel}, '%')
             </if>
             <if test="dictValue != null and dictValue != ''">
                 and dict_value = #{dictValue}

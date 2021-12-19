@@ -181,10 +181,17 @@ export const constantRoutes = [
         meta: {title: '配置管理'},
       },
       {
-        path: 'dict',
+        path: 'dict/type',
         component: () => import('@/views/system/dict/type/index'),
         name: '字典管理',
         meta: {title: '字典管理'}
+      },
+      {
+        path: 'dict/data/:dictId(\\d+)',
+        hidden: true,
+        component: () => import('@/views/system/dict/data/index'),
+        name: '字典数据',
+        meta: {title: '字典数据'}
       },
       {
         path: 'notice',
