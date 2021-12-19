@@ -58,7 +58,7 @@
       <el-table-column label="字典编码" align="center" prop="dictCode"/>
       <el-table-column label="字典标签" align="center" prop="dictLabel">
         <template slot-scope="scope">
-          <span v-if="scope.row.listClass == '' || scope.row.listClass == 'default'">{{scope.row.dictLabel}}</span>
+          <span v-if="scope.row.listClass == null || scope.row.listClass == '' || scope.row.listClass == 'default'">{{scope.row.dictLabel}}</span>
           <el-tag v-else :type="scope.row.listClass == 'primary' ? '' : scope.row.listClass">{{scope.row.dictLabel}}
           </el-tag>
         </template>
@@ -104,7 +104,6 @@
       @pagination="pageList"
     />
 
-    <!-- 添加或修改参数配置对话框 -->
     <!-- 添加或修改参数配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">

@@ -59,12 +59,42 @@
                 and status = #{status}
             </if>
         </where>
+        order by dict_sort
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="dictCode" useGeneratedKeys="true">
-        insert into sys_dict_data(dict_sort, dict_label, dict_value, dict_type, css_class, list_class, is_default, status, create_by, create_time, update_by, update_time, remark)
-        values (#{dictSort}, #{dictLabel}, #{dictValue}, #{dictType}, #{cssClass}, #{listClass}, #{isDefault}, #{status}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}, #{remark})
+        insert into sys_dict_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictSort != null">dict_sort,</if>
+            <if test="dictLabel != null">dict_label,</if>
+            <if test="dictValue != null">dict_value,</if>
+            <if test="dictType != null">dict_type,</if>
+            <if test="cssClass != null">css_class,</if>
+            <if test="listClass != null">list_class,</if>
+            <if test="isDefault != null">is_default,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dictSort != null">#{dictSort},</if>
+            <if test="dictLabel != null">#{dictLabel},</if>
+            <if test="dictValue != null">#{dictValue},</if>
+            <if test="dictType != null">#{dictType},</if>
+            <if test="cssClass != null">#{cssClass},</if>
+            <if test="listClass != null">#{listClass},</if>
+            <if test="isDefault != null">#{isDefault},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
     </insert>
 
     <insert id="insertBatch" keyProperty="dictCode" useGeneratedKeys="true">
