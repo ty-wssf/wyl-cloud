@@ -204,6 +204,12 @@ export const constantRoutes = [
         component: () => import('@/views/system/dept/index'),
         name: '部门管理',
         meta: {title: '部门管理'}
+      },
+      {
+        path: 'post',
+        component: () => import('@/views/system/post/index'),
+        name: '岗位管理',
+        meta: {title: '岗位管理'}
       }
     ]
   }

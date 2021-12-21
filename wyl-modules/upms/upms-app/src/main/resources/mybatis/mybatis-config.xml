@@ -13,6 +13,7 @@
 
     <mappers>
         <mapper resource="mybatis/SysDeptDao.xml"/>
+        <mapper resource="mybatis/SysPostDao.xml"/>
     </mappers>
 
 </configuration>
