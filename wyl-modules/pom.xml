@@ -15,6 +15,8 @@
         <module>dict</module>
         <module>gateway</module>
         <module>module-doc</module>
+        <module>upms</module>
+        <module>upms/upms-start</module>
     </modules>
 
     <dependencies>
@@ -41,6 +43,22 @@
             <dependency>
                 <groupId>com.wyl</groupId>
                 <artifactId>dict-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.wyl</groupId>
+                <artifactId>upms-adapter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wyl</groupId>
+                <artifactId>upms-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wyl</groupId>
+                <artifactId>upms-app</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--Project modules End-->
