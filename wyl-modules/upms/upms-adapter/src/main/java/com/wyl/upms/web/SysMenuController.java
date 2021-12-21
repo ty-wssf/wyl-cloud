@@ -1,14 +1,17 @@
 package com.wyl.upms.web;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
+import cn.wyl.common.core.tree.TreeSupport;
 import cn.wyl.common.core.utils.poi.ExcelUtil;
 import cn.wyl.common.core.web.controller.BaseController;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import com.wyl.upms.dto.clientobject.SysMenuCO;
+import com.wyl.upms.dto.clientobject.SysMenuTreeCO;
 import com.wyl.upms.dto.command.SysMenuAddCommand;
 import com.wyl.upms.dto.command.SysMenuEditCommand;
 import com.wyl.upms.dto.qry.SysMenuPageQry;
@@ -22,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 菜单权限表(SysMenu)表控制层
@@ -88,5 +93,19 @@ public class SysMenuController extends BaseController {
         util.exportExcel(response, list.getData(), "菜单权限表数据");
     }
     /* 基础接口结束 */
+
+    @ApiOperationSupport(order = 11)
+    @ApiOperation(value = "树结构菜单列表")
+    @GetMapping("/tree")
+    public MultiResponse<SysMenuTreeCO> treeList(SysMenuQry qry) {
+        List<SysMenuCO> menuCOList = this.sysMenuService.queryAll(qry).getData();
+        List<SysMenuTreeCO> treeList = menuCOList.stream().map(menuCO -> {
+            SysMenuTreeCO treeCO = new SysMenuTreeCO();
+            BeanUtil.copyProperties(menuCO, treeCO);
+            return treeCO;
+        }).collect(Collectors.toList());
+        treeList = TreeSupport.list2tree(treeList, SysMenuTreeCO::setChildren);
+        return MultiResponse.of(treeList);
+    }
 
 }

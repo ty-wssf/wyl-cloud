@@ -94,7 +94,7 @@ public class SysDeptController extends BaseController {
     }
     /* 基础接口结束 */
 
-    @ApiOperationSupport(order = 1)
+    @ApiOperationSupport(order = 11)
     @ApiOperation(value = "树结构部门列表")
     @GetMapping("/tree")
     public MultiResponse<SysDeptTreeCO> treeList(SysDeptQry qry) {

@@ -40,7 +40,7 @@
         from sys_menu
         <where>
             <if test="menuName != null and menuName != ''">
-                and menu_name = #{menuName}
+                and menu_name like concat('%', #{menuName}, '%')
             </if>
             <if test="parentId != null">
                 and parent_id = #{parentId}
