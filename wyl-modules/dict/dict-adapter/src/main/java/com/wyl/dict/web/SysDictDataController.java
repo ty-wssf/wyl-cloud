@@ -6,24 +6,22 @@ import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
 import cn.wyl.common.core.utils.poi.ExcelUtil;
 import cn.wyl.common.core.web.controller.BaseController;
-import com.wyl.dict.service.SysDictDataService;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import com.wyl.dict.dto.clientobject.SysDictDataCO;
-import com.wyl.dict.dto.qry.SysDictDataPageQry;
-import com.wyl.dict.dto.qry.SysDictDataQry;
 import com.wyl.dict.dto.command.SysDictDataAddCommand;
 import com.wyl.dict.dto.command.SysDictDataEditCommand;
+import com.wyl.dict.dto.qry.SysDictDataPageQry;
+import com.wyl.dict.dto.qry.SysDictDataQry;
+import com.wyl.dict.service.SysDictDataService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.validation.annotation.Validated;
-
 import javax.annotation.Resource;
-
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiOperation;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 字典数据表(SysDictData)表控制层
@@ -31,6 +29,7 @@ import io.swagger.annotations.ApiOperation;
  * @author wyl
  * @since 2021-12-17 21:36:11
  */
+@ApiSort(20)
 @Api(tags = "字典数据表模块")
 @RestController
 @RequestMapping("dict/data")

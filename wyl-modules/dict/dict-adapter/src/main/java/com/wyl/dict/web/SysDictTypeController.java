@@ -6,24 +6,22 @@ import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
 import cn.wyl.common.core.utils.poi.ExcelUtil;
 import cn.wyl.common.core.web.controller.BaseController;
-import com.wyl.dict.service.SysDictTypeService;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import com.wyl.dict.dto.clientobject.SysDictTypeCO;
-import com.wyl.dict.dto.qry.SysDictTypePageQry;
-import com.wyl.dict.dto.qry.SysDictTypeQry;
 import com.wyl.dict.dto.command.SysDictTypeAddCommand;
 import com.wyl.dict.dto.command.SysDictTypeEditCommand;
+import com.wyl.dict.dto.qry.SysDictTypePageQry;
+import com.wyl.dict.dto.qry.SysDictTypeQry;
+import com.wyl.dict.service.SysDictTypeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.validation.annotation.Validated;
-
 import javax.annotation.Resource;
-
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiOperation;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 字典类型表(SysDictType)表控制层
@@ -31,6 +29,7 @@ import io.swagger.annotations.ApiOperation;
  * @author wyl
  * @since 2021-12-17 21:26:43
  */
+@ApiSort(10)
 @Api(tags = "字典类型表模块")
 @RestController
 @RequestMapping("dict/type")

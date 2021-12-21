@@ -6,7 +6,6 @@ create table sys_dept
 (
     dept_id     bigint(20)  not null auto_increment comment '部门id',
     parent_id   bigint(20)  default 0 comment '父部门id',
-    ancestors   varchar(64) not null comment '祖级列表',
     dept_name   varchar(30) not null comment '部门名称',
     order_num   int(4)      default 0 comment '显示顺序',
     leader      varchar(20) default null comment '负责人',

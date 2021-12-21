@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wyl.upms.gatewayimpl.database.SysMenuDao">
+
+    <resultMap type="com.wyl.upms.gatewayimpl.database.dataobject.SysMenu" id="SysMenuMap">
+        <result property="menuId" column="menu_id" jdbcType="INTEGER"/>
+        <result property="menuName" column="menu_name" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="orderNum" column="order_num" jdbcType="INTEGER"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/>
+        <result property="component" column="component" jdbcType="VARCHAR"/>
+        <result property="query" column="query" jdbcType="VARCHAR"/>
+        <result property="isFrame" column="is_frame" jdbcType="INTEGER"/>
+        <result property="isCache" column="is_cache" jdbcType="INTEGER"/>
+        <result property="menuType" column="menu_type" jdbcType="VARCHAR"/>
+        <result property="visible" column="visible" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="perms" column="perms" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryByPrimaryKey" resultMap="SysMenuMap">
+        select
+          menu_id, menu_name, parent_id, order_num, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark
+        from sys_menu
+        where menu_id = #{menuId}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SysMenuMap">
+        select
+        menu_id, menu_name, parent_id, order_num, path, component, query, is_frame, is_cache, menu_type, visible,
+        status, perms, icon, create_by, create_time, update_by, update_time, remark
+        from sys_menu
+        <where>
+            <if test="menuName != null and menuName != ''">
+                and menu_name = #{menuName}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="orderNum != null">
+                and order_num = #{orderNum}
+            </if>
+            <if test="path != null and path != ''">
+                and path = #{path}
+            </if>
+            <if test="component != null and component != ''">
+                and component = #{component}
+            </if>
+            <if test="query != null and query != ''">
+                and query = #{query}
+            </if>
+            <if test="isFrame != null">
+                and is_frame = #{isFrame}
+            </if>
+            <if test="isCache != null">
+                and is_cache = #{isCache}
+            </if>
+            <if test="menuType != null and menuType != ''">
+                and menu_type = #{menuType}
+            </if>
+            <if test="visible != null and visible != ''">
+                and visible = #{visible}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="perms != null and perms != ''">
+                and perms = #{perms}
+            </if>
+            <if test="icon != null and icon != ''">
+                and icon = #{icon}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="menuId" useGeneratedKeys="true">
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuName != null">menu_name,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="path != null">path,</if>
+            <if test="component != null">component,</if>
+            <if test="query != null">query,</if>
+            <if test="isFrame != null">is_frame,</if>
+            <if test="isCache != null">is_cache,</if>
+            <if test="menuType != null">menu_type,</if>
+            <if test="visible != null">visible,</if>
+            <if test="status != null">status,</if>
+            <if test="perms != null">perms,</if>
+            <if test="icon != null">icon,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuName != null">#{menuName},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="path != null">#{path},</if>
+            <if test="component != null">#{component},</if>
+            <if test="query != null">#{query},</if>
+            <if test="isFrame != null">#{isFrame},</if>
+            <if test="isCache != null">#{isCache},</if>
+            <if test="menuType != null">#{menuType},</if>
+            <if test="visible != null">#{visible},</if>
+            <if test="status != null">#{status},</if>
+            <if test="perms != null">#{perms},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" keyProperty="menuId" useGeneratedKeys="true">
+        insert into sys_menu(menu_name, parent_id, order_num, path, component, query, is_frame, is_cache, menu_type,
+        visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.menuName}, #{entity.parentId}, #{entity.orderNum}, #{entity.path}, #{entity.component},
+            #{entity.query}, #{entity.isFrame}, #{entity.isCache}, #{entity.menuType}, #{entity.visible},
+            #{entity.status}, #{entity.perms}, #{entity.icon}, #{entity.createBy}, #{entity.createTime},
+            #{entity.updateBy}, #{entity.updateTime}, #{entity.remark})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="menuId" useGeneratedKeys="true">
+        insert into sys_menu(menu_name, parent_id, order_num, path, component, query, is_frame, is_cache, menu_type,
+        visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.menuName}, #{entity.parentId}, #{entity.orderNum}, #{entity.path}, #{entity.component},
+            #{entity.query}, #{entity.isFrame}, #{entity.isCache}, #{entity.menuType}, #{entity.visible},
+            #{entity.status}, #{entity.perms}, #{entity.icon}, #{entity.createBy}, #{entity.createTime},
+            #{entity.updateBy}, #{entity.updateTime}, #{entity.remark})
+        </foreach>
+        on duplicate key update
+        menu_name = values(menu_name) , parent_id = values(parent_id) , order_num = values(order_num) , path =
+        values(path) , component = values(component) , query = values(query) , is_frame = values(is_frame) , is_cache =
+        values(is_cache) , menu_type = values(menu_type) , visible = values(visible) , status = values(status) , perms =
+        values(perms) , icon = values(icon) , create_by = values(create_by) , create_time = values(create_time) ,
+        update_by = values(update_by) , update_time = values(update_time) , remark = values(remark)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_menu
+        <set>
+            <if test="menuName != null">
+                menu_name = #{menuName},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum},
+            </if>
+            <if test="path != null">
+                path = #{path},
+            </if>
+            <if test="component != null">
+                component = #{component},
+            </if>
+            <if test="query != null">
+                query = #{query},
+            </if>
+            <if test="isFrame != null">
+                is_frame = #{isFrame},
+            </if>
+            <if test="isCache != null">
+                is_cache = #{isCache},
+            </if>
+            <if test="menuType != null">
+                menu_type = #{menuType},
+            </if>
+            <if test="visible != null">
+                visible = #{visible},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="perms != null">
+                perms = #{perms},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where menu_id = #{menuId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteByPrimaryKey">
+        delete from sys_menu where menu_id = #{menuId}
+    </delete>
+
+</mapper>
+

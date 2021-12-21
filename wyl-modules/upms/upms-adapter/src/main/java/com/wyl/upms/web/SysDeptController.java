@@ -9,6 +9,7 @@ import cn.wyl.common.core.tree.TreeSupport;
 import cn.wyl.common.core.utils.poi.ExcelUtil;
 import cn.wyl.common.core.web.controller.BaseController;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import com.wyl.upms.dto.clientobject.SysDeptCO;
 import com.wyl.upms.dto.clientobject.SysDeptTreeCO;
 import com.wyl.upms.dto.command.SysDeptAddCommand;
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
  * @author wyl
  * @since 2021-12-20 16:11:14
  */
+@ApiSort(40)
 @Api(tags = "部门表模块")
 @RestController
 @RequestMapping("sysDept")

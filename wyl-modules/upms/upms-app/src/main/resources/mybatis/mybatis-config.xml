@@ -12,6 +12,12 @@
     </plugins>
 
     <mappers>
+        <mapper resource="mybatis/SysUserDao.xml"/>
+        <mapper resource="mybatis/SysRoleDao.xml"/>
+        <mapper resource="mybatis/SysMenuDao.xml"/>
+        <mapper resource="mybatis/SysUserRoleDao.xml"/>
+        <mapper resource="mybatis/SysUserPostDao.xml"/>
+        <mapper resource="mybatis/SysRoleMenuDao.xml"/>
         <mapper resource="mybatis/SysDeptDao.xml"/>
         <mapper resource="mybatis/SysPostDao.xml"/>
     </mappers>

@@ -7,6 +7,7 @@ import cn.wyl.common.core.dto.SingleResponse;
 import cn.wyl.common.core.utils.poi.ExcelUtil;
 import cn.wyl.common.core.web.controller.BaseController;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import com.wyl.dict.dto.clientobject.SysNoticeCO;
 import com.wyl.dict.dto.command.SysNoticeAddCommand;
 import com.wyl.dict.dto.command.SysNoticeEditCommand;
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author wyl
  * @since 2021-12-16 15:50:05
  */
+@ApiSort(40)
 @Api(tags = "通知公告表模块")
 @RestController
 @RequestMapping("sysNotice")
