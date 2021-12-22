@@ -112,4 +112,11 @@ public class SysUserCO implements Serializable {
     @Excel(name = "备注")
     private String remark;
 
+    // 部门信息
+    private SysDeptCO dept;
+    // 岗位ID
+    private long[] postIds;
+    // 角色ID
+    private long[] roleIds;
+
 }

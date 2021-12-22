@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const baseUrl = '/upms-service/sysPost'
+const baseUrl = '/upms-service/sysUser'
 
 // 分页列表
 export function pageList(query) {
@@ -42,14 +42,5 @@ export function remove(id) {
   return request({
     url: baseUrl + '/' + id,
     method: 'delete'
-  })
-}
-
-// 所有岗位列表
-export function queryAll(query) {
-  return request({
-    url: baseUrl + '/queryAll',
-    method: 'get',
-    params: query
   })
 }

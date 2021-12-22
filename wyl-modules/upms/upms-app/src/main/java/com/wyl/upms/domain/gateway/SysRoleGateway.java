@@ -86,5 +86,7 @@ public interface SysRoleGateway {
      */
     void deleteByPrimaryKey(Long primaryKey);
 
+    List<SysRole> queryRolesByUserId(Long userId);
+
 }
 

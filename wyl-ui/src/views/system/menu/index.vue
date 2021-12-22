@@ -381,10 +381,13 @@
         this.reset();
       },
       /** 新增按钮操作 */
-      handleAdd() {
+      handleAdd(row) {
         this.reset();
+        if (row != undefined) {
+          this.form.parentId = row.menuId;
+        }
         this.open = true;
-        this.title = "添加参数";
+        this.title = "添加菜单";
       },
       /** 修改按钮操作 */
       handleUpdate(row) {
@@ -393,7 +396,7 @@
         getInfo(menuId).then(response => {
           this.form = response.data;
           this.open = true;
-          this.title = "修改参数";
+          this.title = "修改菜单";
         });
       },
       /** 提交按钮 */

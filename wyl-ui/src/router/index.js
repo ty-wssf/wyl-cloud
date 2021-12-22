@@ -216,6 +216,12 @@ export const constantRoutes = [
         component: () => import('@/views/system/menu/index'),
         name: '菜单管理',
         meta: {title: '菜单管理'}
+      },
+      {
+        path: 'user',
+        component: () => import('@/views/system/user/index'),
+        name: '用户管理',
+        meta: {title: '用户管理'}
       }
     ]
   }

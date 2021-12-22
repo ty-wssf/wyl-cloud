@@ -89,4 +89,11 @@ public class SysRoleController extends BaseController {
     }
     /* 基础接口结束 */
 
+    @ApiOperationSupport(order = 11)
+    @ApiOperation(value = "所有角色列表")
+    @GetMapping("/queryAll")
+    public MultiResponse<SysRoleCO> queryAll(SysRoleQry qry) {
+        return this.sysRoleService.queryAll(qry);
+    }
+
 }

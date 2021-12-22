@@ -132,5 +132,10 @@ public class SysRoleGatewayImpl implements SysRoleGateway {
         Assert.isTrue(sysRoleDao.deleteByPrimaryKey(primaryKey) > 0, "删除对象不存在");
     }
 
+    @Override
+    public List<SysRole> queryRolesByUserId(Long userId) {
+        return sysRoleDao.queryRolesByUserId(userId);
+    }
+
 }
 

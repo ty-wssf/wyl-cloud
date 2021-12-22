@@ -66,7 +66,7 @@ public class SysPostController extends BaseController {
     @ApiOperationSupport(order = 4)
     @ApiOperation(value = "编辑")
     @PutMapping("{id}")
-    public Response edit(@Validated @RequestBody SysPostEditCommand command, @PathVariable Long id) {
+    public Response edit(@RequestBody SysPostEditCommand command, @PathVariable Long id) {
         command.setPostId(id);
         return this.sysPostService.update(command);
     }
@@ -88,5 +88,12 @@ public class SysPostController extends BaseController {
         util.exportExcel(response, list.getData(), "岗位信息表数据");
     }
     /* 基础接口结束 */
+
+    @ApiOperationSupport(order = 11)
+    @ApiOperation(value = "所有岗位列表")
+    @GetMapping("/queryAll")
+    public MultiResponse<SysPostCO> queryAll(SysPostQry qry) {
+        return this.sysPostService.queryAll(qry);
+    }
 
 }

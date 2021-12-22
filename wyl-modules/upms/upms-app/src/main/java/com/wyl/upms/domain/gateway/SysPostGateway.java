@@ -86,5 +86,12 @@ public interface SysPostGateway {
      */
     void deleteByPrimaryKey(Long primaryKey);
 
+    /**
+     * 查询用户所属岗位组
+     *
+     * @param userId
+     */
+    List<SysPost> queryPostsByUserId(Long userId);
+
 }
 

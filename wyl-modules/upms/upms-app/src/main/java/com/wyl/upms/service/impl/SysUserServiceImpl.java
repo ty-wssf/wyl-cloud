@@ -1,29 +1,31 @@
 package com.wyl.upms.service.impl;
 
-import cn.wyl.common.core.catchlog.CatchAndLog;
-import com.wyl.upms.gatewayimpl.database.dataobject.SysUser;
-import com.wyl.upms.dto.clientobject.SysUserCO;
-import com.wyl.upms.dto.qry.SysUserQry;
-import com.wyl.upms.dto.qry.SysUserPageQry;
-import com.wyl.upms.dto.command.SysUserAddCommand;
-import com.wyl.upms.dto.command.SysUserEditCommand;
-import com.wyl.upms.domain.gateway.SysUserGateway;
-import com.wyl.upms.service.SysUserService;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 import cn.hutool.core.bean.BeanUtil;
-
-import javax.annotation.Resource;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import javax.validation.Valid;
-import java.util.stream.Collectors;
-
+import cn.wyl.common.core.catchlog.CatchAndLog;
 import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
+import com.wyl.upms.domain.gateway.SysPostGateway;
+import com.wyl.upms.domain.gateway.SysRoleGateway;
+import com.wyl.upms.domain.gateway.SysUserGateway;
+import com.wyl.upms.dto.clientobject.SysUserCO;
+import com.wyl.upms.dto.command.SysUserAddCommand;
+import com.wyl.upms.dto.command.SysUserEditCommand;
+import com.wyl.upms.dto.qry.SysUserPageQry;
+import com.wyl.upms.dto.qry.SysUserQry;
+import com.wyl.upms.gatewayimpl.database.dataobject.SysPost;
+import com.wyl.upms.gatewayimpl.database.dataobject.SysRole;
+import com.wyl.upms.gatewayimpl.database.dataobject.SysUser;
+import com.wyl.upms.service.SysUserService;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 用户信息表(SysUser)表服务实现类
@@ -37,6 +39,10 @@ import cn.wyl.common.core.dto.SingleResponse;
 public class SysUserServiceImpl implements SysUserService {
     @Resource
     private SysUserGateway sysUserGateway;
+    @Resource
+    private SysPostGateway postGateway;
+    @Resource
+    private SysRoleGateway sysRoleGateway;
 
     /**
      * 通过ID查询单条数据
@@ -47,8 +53,12 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public SingleResponse<SysUserCO> queryByPrimaryKey(Long primaryKey) {
         SysUser sysUser = this.sysUserGateway.queryByPrimaryKey(primaryKey);
+        List<SysPost> sysPosts = postGateway.queryPostsByUserId(sysUser.getUserId());
+        List<SysRole> sysRoles = sysRoleGateway.queryRolesByUserId(sysUser.getUserId());
         SysUserCO sysUserCO = new SysUserCO();
         BeanUtil.copyProperties(sysUser, sysUserCO);
+        sysUserCO.setPostIds(sysPosts.stream().mapToLong(SysPost::getPostId).toArray());
+        sysUserCO.setRoleIds(sysRoles.stream().mapToLong(SysRole::getRoleId).toArray());
         return SingleResponse.of(sysUserCO);
     }
 

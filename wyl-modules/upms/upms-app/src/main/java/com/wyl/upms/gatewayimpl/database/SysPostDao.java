@@ -69,5 +69,7 @@ public interface SysPostDao {
      */
     int deleteByPrimaryKey(Long primaryKey);
 
+    List<SysPost> queryPostsByUserId(@Param("userId") Long userId);
+
 }
 

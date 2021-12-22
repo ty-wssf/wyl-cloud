@@ -132,5 +132,10 @@ public class SysPostGatewayImpl implements SysPostGateway {
         Assert.isTrue(sysPostDao.deleteByPrimaryKey(primaryKey) > 0, "删除对象不存在");
     }
 
+    @Override
+    public List<SysPost> queryPostsByUserId(Long userId) {
+        return sysPostDao.queryPostsByUserId(userId);
+    }
+
 }
 

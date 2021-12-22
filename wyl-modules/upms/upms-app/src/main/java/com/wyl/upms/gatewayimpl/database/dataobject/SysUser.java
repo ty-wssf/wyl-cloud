@@ -3,11 +3,13 @@ package com.wyl.upms.gatewayimpl.database.dataobject;
 import cn.wyl.common.core.web.domain.BaseEntity;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * 用户信息表(SysUser)实体类
  *
  * @author wyl
- * @since 2021-12-21 13:22:41
+ * @since 2021-12-21 15:58:58
  */
 @Data
 public class SysUser extends BaseEntity {
@@ -64,5 +66,12 @@ public class SysUser extends BaseEntity {
      * 最后登录IP
      */
     private String loginIp;
+    /**
+     * 最后登录时间
+     */
+    private Date loginDate;
+
+    // 部门信息
+    private SysDept dept;
 
 }

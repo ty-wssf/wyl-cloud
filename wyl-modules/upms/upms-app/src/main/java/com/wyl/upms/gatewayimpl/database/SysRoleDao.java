@@ -69,5 +69,7 @@ public interface SysRoleDao {
      */
     int deleteByPrimaryKey(Long primaryKey);
 
+    List<SysRole> queryRolesByUserId(Long userId);
+
 }
 

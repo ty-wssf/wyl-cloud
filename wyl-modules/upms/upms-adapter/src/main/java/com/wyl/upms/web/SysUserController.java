@@ -66,7 +66,7 @@ public class SysUserController extends BaseController {
     @ApiOperationSupport(order = 4)
     @ApiOperation(value = "编辑")
     @PutMapping("{id}")
-    public Response edit(@Validated @RequestBody SysUserEditCommand command, @PathVariable Long id) {
+    public Response edit(@RequestBody SysUserEditCommand command, @PathVariable Long id) {
         command.setUserId(id);
         return this.sysUserService.update(command);
     }
