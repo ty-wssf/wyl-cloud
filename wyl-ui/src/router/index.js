@@ -222,6 +222,12 @@ export const constantRoutes = [
         component: () => import('@/views/system/user/index'),
         name: '用户管理',
         meta: {title: '用户管理'}
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/system/role/index'),
+        name: '角色管理',
+        meta: {title: '角色管理'}
       }
     ]
   }
