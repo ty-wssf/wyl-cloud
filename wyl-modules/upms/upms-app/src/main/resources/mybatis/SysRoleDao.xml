@@ -7,9 +7,7 @@
         <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
         <result property="roleKey" column="role_key" jdbcType="VARCHAR"/>
         <result property="roleSort" column="role_sort" jdbcType="INTEGER"/>
-        <result property="dataScope" column="data_scope" jdbcType="VARCHAR"/>
-        <result property="menuCheckStrictly" column="menu_check_strictly" jdbcType="INTEGER"/>
-        <result property="deptCheckStrictly" column="dept_check_strictly" jdbcType="INTEGER"/>
+        <result property="dataScope" column="data_scope" jdbcType="INTEGER"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
         <result property="delFlag" column="del_flag" jdbcType="VARCHAR"/>
         <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
@@ -22,7 +20,7 @@
     <!--查询单个-->
     <select id="queryByPrimaryKey" resultMap="SysRoleMap">
         select
-          role_id, role_name, role_key, role_sort, data_scope, menu_check_strictly, dept_check_strictly, status, del_flag, create_by, create_time, update_by, update_time, remark
+          role_id, role_name, role_key, role_sort, data_scope, status, del_flag, create_by, create_time, update_by, update_time, remark
         from sys_role
         where role_id = #{roleId}
     </select>
@@ -30,8 +28,8 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="SysRoleMap">
         select
-        role_id, role_name, role_key, role_sort, data_scope, menu_check_strictly, dept_check_strictly, status, del_flag,
-        create_by, create_time, update_by, update_time, remark
+        role_id, role_name, role_key, role_sort, data_scope, status, del_flag, create_by, create_time, update_by,
+        update_time, remark
         from sys_role
         <where>
             <if test="roleName != null and roleName != ''">
@@ -43,14 +41,8 @@
             <if test="roleSort != null">
                 and role_sort = #{roleSort}
             </if>
-            <if test="dataScope != null and dataScope != ''">
+            <if test="dataScope != null">
                 and data_scope = #{dataScope}
-            </if>
-            <if test="menuCheckStrictly != null">
-                and menu_check_strictly = #{menuCheckStrictly}
-            </if>
-            <if test="deptCheckStrictly != null">
-                and dept_check_strictly = #{deptCheckStrictly}
             </if>
             <if test="status != null and status != ''">
                 and status = #{status}
@@ -69,8 +61,6 @@
             <if test="roleKey != null">role_key,</if>
             <if test="roleSort != null">role_sort,</if>
             <if test="dataScope != null">data_scope,</if>
-            <if test="menuCheckStrictly != null">menu_check_strictly,</if>
-            <if test="deptCheckStrictly != null">dept_check_strictly,</if>
             <if test="status != null">status,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
@@ -84,8 +74,6 @@
             <if test="roleKey != null">#{roleKey},</if>
             <if test="roleSort != null">#{roleSort},</if>
             <if test="dataScope != null">#{dataScope},</if>
-            <if test="menuCheckStrictly != null">#{menuCheckStrictly},</if>
-            <if test="deptCheckStrictly != null">#{deptCheckStrictly},</if>
             <if test="status != null">#{status},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
@@ -97,8 +85,8 @@
     </insert>
 
     <insert id="insertBatch" keyProperty="roleId" useGeneratedKeys="true">
-        insert into sys_role(role_name, role_key, role_sort, data_scope, menu_check_strictly, dept_check_strictly,
-        status, del_flag, create_by, create_time, update_by, update_time, remark)
+        insert into sys_role(role_name, role_key, role_sort, data_scope, status, del_flag, create_by, create_time,
+        update_by, update_time, remark)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.roleName}, #{entity.roleKey}, #{entity.roleSort}, #{entity.dataScope},
@@ -108,20 +96,19 @@
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="roleId" useGeneratedKeys="true">
-        insert into sys_role(role_name, role_key, role_sort, data_scope, menu_check_strictly, dept_check_strictly,
-        status, del_flag, create_by, create_time, update_by, update_time, remark)
+        insert into sys_role(role_name, role_key, role_sort, data_scope, status, del_flag, create_by, create_time,
+        update_by, update_time, remark)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.roleName}, #{entity.roleKey}, #{entity.roleSort}, #{entity.dataScope},
-            #{entity.menuCheckStrictly}, #{entity.deptCheckStrictly}, #{entity.status}, #{entity.delFlag},
-            #{entity.createBy}, #{entity.createTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.remark})
+            (#{entity.roleName}, #{entity.roleKey}, #{entity.roleSort}, #{entity.dataScope}, #{entity.status},
+            #{entity.delFlag}, #{entity.createBy}, #{entity.createTime}, #{entity.updateBy}, #{entity.updateTime},
+            #{entity.remark})
         </foreach>
         on duplicate key update
         role_name = values(role_name) , role_key = values(role_key) , role_sort = values(role_sort) , data_scope =
-        values(data_scope) , menu_check_strictly = values(menu_check_strictly) , dept_check_strictly =
-        values(dept_check_strictly) , status = values(status) , del_flag = values(del_flag) , create_by =
-        values(create_by) , create_time = values(create_time) , update_by = values(update_by) , update_time =
-        values(update_time) , remark = values(remark)
+        values(data_scope) , status = values(status) , del_flag = values(del_flag) , create_by = values(create_by) ,
+        create_time = values(create_time) , update_by = values(update_by) , update_time = values(update_time) , remark =
+        values(remark)
     </insert>
 
     <!--通过主键修改数据-->
@@ -139,12 +126,6 @@
             </if>
             <if test="dataScope != null">
                 data_scope = #{dataScope},
-            </if>
-            <if test="menuCheckStrictly != null">
-                menu_check_strictly = #{menuCheckStrictly},
-            </if>
-            <if test="deptCheckStrictly != null">
-                dept_check_strictly = #{deptCheckStrictly},
             </if>
             <if test="status != null">
                 status = #{status},

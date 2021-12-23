@@ -2,6 +2,7 @@ package com.wyl.upms.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.wyl.common.core.catchlog.CatchAndLog;
+import cn.wyl.common.core.datascope.DataScope;
 import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
@@ -87,6 +88,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @param pageQry 实例对象
      * @return 对象列表
      */
+    @DataScope(deptAlias = "d", userAlias = "u")
     @Override
     public PageResponse<SysUserCO> queryPage(SysUserPageQry pageQry) {
         SysUser sysUserDO = new SysUser();

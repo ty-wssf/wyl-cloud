@@ -175,10 +175,34 @@ export const constantRoutes = [
     },
     children: [
       {
-        path: 'config',
-        component: () => import('@/views/system/config/index'),
-        name: '配置管理',
-        meta: {title: '配置管理'},
+        path: 'user',
+        component: () => import('@/views/system/user/index'),
+        name: '用户管理',
+        meta: {title: '用户管理'}
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/system/role/index'),
+        name: '角色管理',
+        meta: {title: '角色管理'}
+      },
+      {
+        path: 'menu',
+        component: () => import('@/views/system/menu/index'),
+        name: '菜单管理',
+        meta: {title: '菜单管理'}
+      },
+      {
+        path: 'dept',
+        component: () => import('@/views/system/dept/index'),
+        name: '部门管理',
+        meta: {title: '部门管理'}
+      },
+      {
+        path: 'post',
+        component: () => import('@/views/system/post/index'),
+        name: '岗位管理',
+        meta: {title: '岗位管理'}
       },
       {
         path: 'dict/type',
@@ -194,41 +218,17 @@ export const constantRoutes = [
         meta: {title: '字典数据'}
       },
       {
+        path: 'config',
+        component: () => import('@/views/system/config/index'),
+        name: '参数设置',
+        meta: {title: '参数设置'},
+      },
+      {
         path: 'notice',
         component: () => import('@/views/system/notice/index'),
-        name: '公告管理',
-        meta: {title: '公告管理'}
+        name: '通知公告',
+        meta: {title: '通知公告'}
       },
-      {
-        path: 'dept',
-        component: () => import('@/views/system/dept/index'),
-        name: '部门管理',
-        meta: {title: '部门管理'}
-      },
-      {
-        path: 'post',
-        component: () => import('@/views/system/post/index'),
-        name: '岗位管理',
-        meta: {title: '岗位管理'}
-      },
-      {
-        path: 'menu',
-        component: () => import('@/views/system/menu/index'),
-        name: '菜单管理',
-        meta: {title: '菜单管理'}
-      },
-      {
-        path: 'user',
-        component: () => import('@/views/system/user/index'),
-        name: '用户管理',
-        meta: {title: '用户管理'}
-      },
-      {
-        path: 'role',
-        component: () => import('@/views/system/role/index'),
-        name: '角色管理',
-        meta: {title: '角色管理'}
-      }
     ]
   }
 ]

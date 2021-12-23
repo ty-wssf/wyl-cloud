@@ -1,12 +1,9 @@
 package com.wyl.upms.dto.qry;
 
-import lombok.Data;
-
-import java.util.Date;
-
 import cn.wyl.common.core.dto.Query;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * 用户信息表(SysUser)查询对象
@@ -52,7 +49,7 @@ public class SysUserQry extends Query {
      * 用户性别（0男 1女 2未知）
      */
     @ApiModelProperty(value = "用户性别（0男 1女 2未知）", position = 7)
-    private String sex;
+    private Integer sex;
     /**
      * 头像地址
      */
@@ -67,12 +64,12 @@ public class SysUserQry extends Query {
      * 帐号状态（0正常 1停用）
      */
     @ApiModelProperty(value = "帐号状态（0正常 1停用）", position = 10)
-    private String status;
+    private Integer status;
     /**
      * 删除标志（0代表存在 2代表删除）
      */
     @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）", position = 11)
-    private String delFlag;
+    private Integer delFlag;
     /**
      * 最后登录IP
      */

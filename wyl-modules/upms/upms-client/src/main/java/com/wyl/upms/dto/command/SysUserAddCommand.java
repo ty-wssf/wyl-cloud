@@ -1,15 +1,15 @@
 package com.wyl.upms.dto.command;
 
 import cn.wyl.common.core.dto.Command;
-import lombok.Data;
-
-import java.util.Date;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 /**
  * 用户信息表(SysUser)查询对象
@@ -62,9 +62,9 @@ public class SysUserAddCommand extends Command {
      * 用户性别（0男 1女 2未知）
      */
     @ApiModelProperty(value = "用户性别（0男 1女 2未知）", position = 8)
-    @NotBlank(message = "用户性别（0男 1女 2未知）不能为空")
-    @Size(max = 1, message = "用户性别（0男 1女 2未知）长度不能超过{max}个字符")
-    private String sex;
+    @NotNull(message = "用户性别（0男 1女 2未知）不能为空")
+    @Range(max = 1, message = "用户性别（0男 1女 2未知）长度不能超过{max}个字符")
+    private Integer sex;
     /**
      * 头像地址
      */
@@ -81,14 +81,16 @@ public class SysUserAddCommand extends Command {
      * 帐号状态（0正常 1停用）
      */
     @ApiModelProperty(value = "帐号状态（0正常 1停用）", position = 11)
-    @Size(max = 1, message = "帐号状态（0正常 1停用）长度不能超过{max}个字符")
-    private String status;
+    @NotNull(message = "帐号状态（0正常 1停用）不能为空")
+    @Range(max = 1, message = "帐号状态（0正常 1停用）长度不能超过{max}个字符")
+    private Integer status;
     /**
      * 删除标志（0代表存在 2代表删除）
      */
     @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）", position = 12)
-    @Size(max = 1, message = "删除标志（0代表存在 2代表删除）长度不能超过{max}个字符")
-    private String delFlag;
+    @NotNull(message = "删除标志（0代表存在 2代表删除）不能为空")
+    @Range(max = 1, message = "删除标志（0代表存在 2代表删除）长度不能超过{max}个字符")
+    private Integer delFlag;
     /**
      * 最后登录IP
      */
@@ -126,7 +128,7 @@ public class SysUserAddCommand extends Command {
      * 备注
      */
     @ApiModelProperty(value = "备注", position = 19)
-    @Size(max = 640, message = "备注长度不能超过{max}个字符")
+    @Size(max = 512, message = "备注长度不能超过{max}个字符")
     private String remark;
 
 }

@@ -90,8 +90,8 @@
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.status"
-            active-value="0"
-            inactive-value="1"
+            :active-value=0
+            :inactive-value=1
             @change="handleStatusChange(scope.row)"
           ></el-switch>
         </template>
@@ -142,7 +142,7 @@
     <pagination
       v-show="total>0"
       :total="total"
-      :page.sync="queryParams.pageQuery.pageNum"
+      :page.sync="queryParams.pageQuery.pageIndex"
       :limit.sync="queryParams.pageQuery.pageSize"
       @pagination="pageList"
     />
@@ -354,7 +354,6 @@
       pageList() {
         this.loading = true;
         pageList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-            debugger
             this.pageListData = response.data;
             this.total = response.totalCount;
             this.loading = false;
@@ -459,7 +458,6 @@
         this.loading = true;
         roleList().then(response => {
             this.roleOptions = response.data;
-            this.total = response.totalCount;
             this.loading = false;
           }
         );
@@ -469,7 +467,6 @@
         this.loading = true;
         postList().then(response => {
             this.postOptions = response.data;
-            this.total = response.totalCount;
             this.loading = false;
           }
         );

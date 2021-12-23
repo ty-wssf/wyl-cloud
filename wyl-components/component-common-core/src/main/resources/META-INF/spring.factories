@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.wyl.common.core.catchlog.CatchLogAutoConfiguration,\
-  cn.wyl.common.core.exception.GlobalExceptionHandler
+  cn.wyl.common.core.exception.GlobalExceptionHandler,\
+  cn.wyl.common.core.datascope.DataScopeAspect
