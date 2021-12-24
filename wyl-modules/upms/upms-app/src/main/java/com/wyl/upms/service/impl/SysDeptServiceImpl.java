@@ -6,8 +6,11 @@ import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
+import cn.wyl.common.core.tree.TreeSupport;
+import cn.wyl.common.core.utils.SpringUtilExtra;
 import com.wyl.upms.domain.gateway.SysDeptGateway;
 import com.wyl.upms.dto.clientobject.SysDeptCO;
+import com.wyl.upms.dto.clientobject.SysDeptTreeCO;
 import com.wyl.upms.dto.command.SysDeptAddCommand;
 import com.wyl.upms.dto.command.SysDeptEditCommand;
 import com.wyl.upms.dto.qry.SysDeptPageQry;
@@ -128,4 +131,17 @@ public class SysDeptServiceImpl implements SysDeptService {
         Arrays.asList(primaryKeys).stream().forEach(primaryKey -> this.sysDeptGateway.deleteByPrimaryKey(primaryKey));
         return Response.buildSuccess();
     }
+
+    @Override
+    public MultiResponse<SysDeptTreeCO> treeList(SysDeptQry qry) {
+        List<SysDeptCO> deptCOList = SpringUtilExtra.getAopProxy(this).queryAll(qry).getData();
+        List<SysDeptTreeCO> treeList = deptCOList.stream().map(deptCO -> {
+            SysDeptTreeCO treeCO = new SysDeptTreeCO();
+            BeanUtil.copyProperties(deptCO, treeCO);
+            return treeCO;
+        }).collect(Collectors.toList());
+        treeList = TreeSupport.list2tree(treeList, SysDeptTreeCO::setChildren);
+        return MultiResponse.of(treeList);
+    }
+
 }

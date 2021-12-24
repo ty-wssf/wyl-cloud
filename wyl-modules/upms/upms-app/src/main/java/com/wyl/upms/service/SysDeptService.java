@@ -5,6 +5,7 @@ import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
 import com.wyl.upms.dto.clientobject.SysDeptCO;
+import com.wyl.upms.dto.clientobject.SysDeptTreeCO;
 import com.wyl.upms.dto.command.SysDeptAddCommand;
 import com.wyl.upms.dto.command.SysDeptEditCommand;
 import com.wyl.upms.dto.qry.SysDeptPageQry;
@@ -67,5 +68,13 @@ public interface SysDeptService {
      * @return 是否成功
      */
     Response deleteByPrimaryKeys(Long[] primaryKeys);
+
+    /**
+     * 树结构部门列表
+     *
+     * @param qry
+     * @return
+     */
+    MultiResponse<SysDeptTreeCO> treeList(SysDeptQry qry);
 
 }

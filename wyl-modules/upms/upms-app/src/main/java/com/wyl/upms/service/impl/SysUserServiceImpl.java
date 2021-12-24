@@ -2,7 +2,7 @@ package com.wyl.upms.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.wyl.common.core.catchlog.CatchAndLog;
-import cn.wyl.common.core.datascope.DataScope;
+import cn.wyl.common.datascope.DataScope;
 import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;

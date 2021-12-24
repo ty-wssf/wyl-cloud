@@ -1,4 +1,4 @@
-package cn.wyl.common.core.datascope;
+package cn.wyl.common.datascope;
 
 import java.lang.annotation.*;
 

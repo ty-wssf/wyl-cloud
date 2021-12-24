@@ -109,9 +109,10 @@ public interface TreeSupport<PK> extends Serializable {
                 //获取根节点
                 .filter(rootNodePredicate)
                 .collect(Collectors.toList());
+
     }
 
-    // 基于树结构进行搜索
+    /*// 基于树结构进行搜索
     static <N extends TreeSupport<PK>, PK> void search(final Collection<N> rootList, Predicate<N> searchPredicate) {
 
         TreeHelper treeHelper = new TreeHelper<N, PK>() {
@@ -176,7 +177,7 @@ public interface TreeSupport<PK> extends Serializable {
                 }
             }
         }
-    }
+    }*/
 
     /**
      * 树结构Helper
@@ -200,17 +201,6 @@ public interface TreeSupport<PK> extends Serializable {
          * @return 节点
          */
         T getNode(PK id);
-
-        default void addNode(T node) {
-        }
-
-        default boolean containsNode(T node) {
-            return false;
-        }
-
-        default String getPath(T node) {
-            return null;
-        }
 
     }
 

@@ -1,11 +1,9 @@
 package com.wyl.upms.web;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
-import cn.wyl.common.core.tree.TreeSupport;
 import cn.wyl.common.core.utils.poi.ExcelUtil;
 import cn.wyl.common.core.web.controller.BaseController;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
@@ -25,8 +23,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 部门表(SysDept)表控制层
@@ -98,14 +94,7 @@ public class SysDeptController extends BaseController {
     @ApiOperation(value = "树结构部门列表")
     @GetMapping("/tree")
     public MultiResponse<SysDeptTreeCO> treeList(SysDeptQry qry) {
-        List<SysDeptCO> deptCOList = this.sysDeptService.queryAll(qry).getData();
-        List<SysDeptTreeCO> treeList = deptCOList.stream().map(deptCO -> {
-            SysDeptTreeCO treeCO = new SysDeptTreeCO();
-            BeanUtil.copyProperties(deptCO, treeCO);
-            return treeCO;
-        }).collect(Collectors.toList());
-        treeList = TreeSupport.list2tree(treeList, SysDeptTreeCO::setChildren);
-        return MultiResponse.of(treeList);
+        return this.sysDeptService.treeList(qry);
     }
 
 }

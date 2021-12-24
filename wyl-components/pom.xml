@@ -14,6 +14,8 @@
     <modules>
         <module>component-extension-starter</module>
         <module>component-common-core</module>
+        <module>component-common-dto</module>
+        <module>component-common-datascope</module>
     </modules>
 
     <properties>

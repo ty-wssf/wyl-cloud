@@ -1,15 +1,20 @@
-package cn.wyl.common.core.datascope;
+package cn.wyl.common.datascope;
 
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import cn.wyl.common.core.dto.Query;
-import cn.wyl.common.core.security.LoginUser;
-import cn.wyl.common.core.security.Role;
-import cn.wyl.common.core.security.SecurityUtils;
+import cn.wyl.common.core.tree.TreeSupport;
+import cn.wyl.common.security.LoginUser;
+import cn.wyl.common.security.Role;
+import cn.wyl.common.security.SecurityUtils;
+import com.wyl.upms.api.RemoteDeptService;
+import com.wyl.upms.dto.clientobject.SysDeptTreeCO;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 数据过滤处理
@@ -59,12 +64,12 @@ public class DataScopeAspect {
         // 获取当前的用户
         LoginUser loginUser = SecurityUtils.getLoginUser();
         loginUser = new LoginUser();
-        loginUser.setDeptId(105L);
+        loginUser.setDeptId(100L);
         Role role1 = new Role();
-        role1.setDataScope("3");
-        //loginUser.addRole(role1);
+        role1.setDataScope("4");
+        loginUser.addRole(role1);
         // 如果是超级管理员，则不过滤数据
-        if (ObjectUtil.isNotNull(loginUser) && !loginUser.isAdmin()) {
+        if (loginUser != null && !loginUser.isAdmin()) {
             dataScopeFilter(joinPoint, loginUser, controllerDataScope.deptAlias(),
                     controllerDataScope.userAlias());
         }
@@ -87,18 +92,28 @@ public class DataScopeAspect {
                 sqlString = new StringBuilder();
                 break;
             } else if (DATA_SCOPE_CUSTOM.equals(dataScope)) {
-                sqlString.append(StrUtil.format(
-                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", deptAlias,
-                        role.getRoleId()));
+                sqlString.append(String.format(" OR %s.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = %s ) ",
+                        deptAlias, role.getRoleId()));
             } else if (DATA_SCOPE_DEPT.equals(dataScope)) {
-                sqlString.append(StrUtil.format(" OR {}.dept_id = {} ", deptAlias, user.getDeptId()));
+                sqlString.append(String.format(" OR %s.dept_id = %s ", deptAlias, user.getDeptId()));
             } else if (DATA_SCOPE_DEPT_AND_CHILD.equals(dataScope)) {
-                sqlString.append(StrUtil.format(
-                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE dept_id = {} or find_in_set( {} , ancestors ) )",
-                        deptAlias, user.getDeptId(), user.getDeptId()));
+                List<SysDeptTreeCO> sysDeptCOList = SpringUtil.getBean(RemoteDeptService.class).treeList().getData();
+                List<SysDeptTreeCO> root = new ArrayList<>();
+                TreeSupport.forEach(sysDeptCOList, node -> {
+                    if (user.getDeptId().equals(node.getId())) {
+                        root.add(node);
+                    }
+                });
+                List<String> subList = new ArrayList<>();
+                TreeSupport.forEach(root, node -> {
+                    subList.add(String.valueOf(node.getId()));
+                });
+                sqlString.append(String.format(
+                        " OR %s.dept_id IN ( %s )",
+                        deptAlias, "'" + String.join(",", subList).replace(",", "','") + "'"));
             } else if (DATA_SCOPE_SELF.equals(dataScope)) {
-                if (StrUtil.isNotBlank(userAlias)) {
-                    sqlString.append(StrUtil.format(" OR {}.user_id = {} ", userAlias, user.getUserId()));
+                if (userAlias != null && userAlias.length() > 0) {
+                    sqlString.append(String.format(" OR %s.user_id = %s ", userAlias, user.getUserId()));
                 } else {
                     // 数据权限为仅本人且没有userAlias别名不查询任何数据
                     sqlString.append(" OR 1=0 ");
@@ -106,9 +121,9 @@ public class DataScopeAspect {
             }
         }
 
-        if (StrUtil.isNotBlank(sqlString.toString())) {
+        if (sqlString.toString().length() > 0) {
             Object params = joinPoint.getArgs()[0];
-            if (ObjectUtil.isNotNull(params) && params instanceof Query) {
+            if (params != null && params instanceof Query) {
                 Query query = (Query) params;
                 query.getParams().put(DATA_SCOPE, " AND (" + sqlString.substring(4) + ")");
             }
@@ -120,7 +135,7 @@ public class DataScopeAspect {
      */
     private void clearDataScope(final JoinPoint joinPoint) {
         Object params = joinPoint.getArgs()[0];
-        if (ObjectUtil.isNotNull(params) && params instanceof Query) {
+        if (params != null && params instanceof Query) {
             Query query = (Query) params;
             query.getParams().put(DATA_SCOPE, "");
         }

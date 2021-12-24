@@ -91,6 +91,12 @@
             <artifactId>poi-ooxml</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.wyl</groupId>
+            <artifactId>component-common-dto</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

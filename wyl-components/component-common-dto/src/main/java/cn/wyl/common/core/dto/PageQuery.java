@@ -1,6 +1,5 @@
 package cn.wyl.common.core.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Map;

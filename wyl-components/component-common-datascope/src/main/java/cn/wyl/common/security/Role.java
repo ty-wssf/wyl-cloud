@@ -1,4 +1,4 @@
-package cn.wyl.common.core.security;
+package cn.wyl.common.security;
 
 import lombok.Data;
 
