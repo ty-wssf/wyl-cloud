@@ -132,5 +132,20 @@ public class SysUserGatewayImpl implements SysUserGateway {
         Assert.isTrue(sysUserDao.deleteByPrimaryKey(primaryKey) > 0, "删除对象不存在");
     }
 
+    @Override
+    public SysUser queryByUserName(String userName) {
+        return sysUserDao.queryOneByUserName(userName);
+    }
+
+    @Override
+    public SysUser queryByPhonenumber(String phonenumber) {
+        return sysUserDao.queryOneByPhonenumber(phonenumber);
+    }
+
+    @Override
+    public SysUser queryByEmail(String email) {
+        return sysUserDao.queryOneByEmail(email);
+    }
+
 }
 

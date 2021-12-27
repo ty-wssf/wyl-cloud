@@ -73,5 +73,11 @@ public class SysUser extends BaseEntity {
 
     // 部门信息
     private SysDept dept;
+    private Long[] postIds;
+    private Long[] roleIds;
+
+    public boolean isAdmin() {
+        return userId != null && 1L == userId;
+    }
 
 }

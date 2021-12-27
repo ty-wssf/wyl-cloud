@@ -1,17 +1,16 @@
 package com.wyl.upms.service;
 
-import com.wyl.upms.gatewayimpl.database.dataobject.SysUser;
+import cn.wyl.common.core.dto.MultiResponse;
+import cn.wyl.common.core.dto.PageResponse;
+import cn.wyl.common.core.dto.Response;
+import cn.wyl.common.core.dto.SingleResponse;
 import com.wyl.upms.dto.clientobject.SysUserCO;
-import com.wyl.upms.dto.qry.SysUserQry;
-import com.wyl.upms.dto.qry.SysUserPageQry;
 import com.wyl.upms.dto.command.SysUserAddCommand;
 import com.wyl.upms.dto.command.SysUserEditCommand;
-import cn.wyl.common.core.dto.SingleResponse;
-import cn.wyl.common.core.dto.Response;
-import cn.wyl.common.core.dto.PageResponse;
-import cn.wyl.common.core.dto.MultiResponse;
+import com.wyl.upms.dto.qry.SysUserPageQry;
+import com.wyl.upms.dto.qry.SysUserQry;
+import com.wyl.upms.gatewayimpl.database.dataobject.SysUser;
 
-import java.util.List;
 import javax.validation.Valid;
 
 /**
@@ -69,5 +68,67 @@ public interface SysUserService {
      * @return 是否成功
      */
     Response deleteByPrimaryKeys(Long[] primaryKeys);
+
+    /**
+     * 校验用户名称是否唯一
+     *
+     * @param userName 用户名称
+     * @return 结果
+     */
+    SingleResponse<Boolean> checkUserNameUnique(String userName);
+
+    /**
+     * 校验手机号码是否唯一
+     *
+     * @param phone 手机号码
+     * @return 结果
+     */
+    SingleResponse<Boolean> checkPhoneUnique(String phone);
+
+    /**
+     * 校验email是否唯一
+     *
+     * @param email 邮件
+     * @return 结果
+     */
+    SingleResponse<Boolean> checkEmailUnique(String email);
+
+    /**
+     * 校验手机号码是否唯一
+     *
+     * @param sysUser 用户信息
+     * @return
+     */
+    SingleResponse<Boolean> checkPhoneUnique(SysUser sysUser);
+
+    /**
+     * 校验email是否唯一
+     *
+     * @param sysUser 用户信息
+     * @return
+     */
+    SingleResponse<Boolean> checkEmailUnique(SysUser sysUser);
+
+    /**
+     * 新增用户信息
+     *
+     * @param user 用户信息
+     * @return 结果
+     */
+    void insertUser(SysUser user);
+
+    /**
+     * 校验用户是否允许操作
+     *
+     * @param user 用户信息
+     */
+    void checkUserAllowed(SysUser user);
+
+    /**
+     * 重置用户密码
+     *
+     * @param user 用户信息
+     */
+    void resetPwd(SysUser user);
 
 }

@@ -69,5 +69,23 @@ public interface SysUserDao {
      */
     int deleteByPrimaryKey(Long primaryKey);
 
+    /**
+     * @param userName 用户名
+     * @return 实例对象
+     */
+    SysUser queryOneByUserName(@Param("userName") String userName);
+
+    /**
+     * @param phonenumber 手机号码
+     * @return 实例对象
+     */
+    SysUser queryOneByPhonenumber(@Param("phonenumber") String phonenumber);
+
+    /**
+     * @param email 邮件
+     * @return 实例对象
+     */
+    SysUser queryOneByEmail(@Param("email") String email);
+
 }
 

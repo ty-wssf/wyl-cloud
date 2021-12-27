@@ -6,6 +6,7 @@
         <result property="dictId" column="dict_id" jdbcType="INTEGER"/>
         <result property="dictName" column="dict_name" jdbcType="VARCHAR"/>
         <result property="dictType" column="dict_type" jdbcType="VARCHAR"/>
+        <result property="dataType" column="data_type" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
         <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -110,6 +111,12 @@
     <delete id="deleteByPrimaryKey">
         delete from sys_dict_type where dict_id = #{dictId}
     </delete>
+
+    <select id="queryByDictType" resultMap="SysDictTypeMap">
+        select *
+        from sys_dict_type
+        where dict_type = #{dictType}
+    </select>
 
 </mapper>
 

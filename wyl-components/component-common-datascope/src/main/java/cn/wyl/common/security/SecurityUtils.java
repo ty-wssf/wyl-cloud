@@ -12,4 +12,9 @@ public class SecurityUtils {
     public static LoginUser getLoginUser() {
         return new LoginUser();
     }
+
+    public static String encryptPassword(String password) {
+        return password;
+    }
+
 }

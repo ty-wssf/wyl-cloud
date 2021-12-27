@@ -1,7 +1,6 @@
 package com.wyl.upms.gatewayimpl.database;
 
 import com.wyl.upms.gatewayimpl.database.dataobject.SysUserPost;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -38,22 +37,6 @@ public interface SysUserPostDao {
     int insert(SysUserPost sysUserPost);
 
     /**
-     * 批量新增数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<SysUserPost> 实例对象列表
-     * @return 影响行数
-     */
-    int insertBatch(@Param("entities") List<SysUserPost> entities);
-
-    /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<SysUserPost> 实例对象列表
-     * @return 影响行数
-     */
-    int insertOrUpdateBatch(@Param("entities") List<SysUserPost> entities);
-
-    /**
      * 修改数据
      *
      * @param sysUserPost 实例对象
@@ -68,6 +51,12 @@ public interface SysUserPostDao {
      * @return 影响行数
      */
     int deleteByPrimaryKey(Long primaryKey);
+
+    /**
+     * 删除用户与岗位关联
+     * @param userId
+     */
+    void deleteUserPostByUserId(Long userId);
 
 }
 

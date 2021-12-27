@@ -1,28 +1,29 @@
 package com.wyl.dict.service.impl;
 
-import cn.wyl.common.core.catchlog.CatchAndLog;
-import com.wyl.dict.gatewayimpl.database.dataobject.SysDictData;
-import com.wyl.dict.dto.clientobject.SysDictDataCO;
-import com.wyl.dict.dto.qry.SysDictDataQry;
-import com.wyl.dict.dto.qry.SysDictDataPageQry;
-import com.wyl.dict.dto.command.SysDictDataAddCommand;
-import com.wyl.dict.dto.command.SysDictDataEditCommand;
-import com.wyl.dict.domain.gateway.SysDictDataGateway;
-import com.wyl.dict.service.SysDictDataService;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 import cn.hutool.core.bean.BeanUtil;
-
-import javax.annotation.Resource;
-import java.util.List;
-import java.util.Arrays;
-import javax.validation.Valid;
-import java.util.stream.Collectors;
-
+import cn.wyl.common.core.catchlog.CatchAndLog;
 import cn.wyl.common.core.dto.MultiResponse;
 import cn.wyl.common.core.dto.PageResponse;
 import cn.wyl.common.core.dto.Response;
 import cn.wyl.common.core.dto.SingleResponse;
+import com.wyl.dict.domain.gateway.SysDictDataGateway;
+import com.wyl.dict.domain.gateway.SysDictTypeGateway;
+import com.wyl.dict.dto.clientobject.SysDictDataCO;
+import com.wyl.dict.dto.command.SysDictDataAddCommand;
+import com.wyl.dict.dto.command.SysDictDataEditCommand;
+import com.wyl.dict.dto.qry.SysDictDataPageQry;
+import com.wyl.dict.dto.qry.SysDictDataQry;
+import com.wyl.dict.gatewayimpl.database.dataobject.SysDictData;
+import com.wyl.dict.gatewayimpl.database.dataobject.SysDictType;
+import com.wyl.dict.service.SysDictDataService;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 字典数据表(SysDictData)表服务实现类
@@ -36,6 +37,8 @@ import cn.wyl.common.core.dto.SingleResponse;
 public class SysDictDataServiceImpl implements SysDictDataService {
     @Resource
     private SysDictDataGateway sysDictDataGateway;
+    @Resource
+    private SysDictTypeGateway sysDictTypeGateway;
 
     /**
      * 通过ID查询单条数据
@@ -138,6 +141,11 @@ public class SysDictDataServiceImpl implements SysDictDataService {
         List<SysDictDataCO> sysDictDataCOList = sysDictDataList.stream().map(sysDictData -> {
             SysDictDataCO sysDictDataCO = new SysDictDataCO();
             BeanUtil.copyProperties(sysDictData, sysDictDataCO);
+
+            SysDictType sysDictType = sysDictTypeGateway.queryByDictType(dictType);
+            if ("2".equals(sysDictType.getDataType())) {
+                sysDictDataCO.setDictValue(Integer.valueOf(sysDictDataCO.getDictValue().toString()));
+            }
             return sysDictDataCO;
         }).collect(Collectors.toList());
         return MultiResponse.of(sysDictDataCOList);

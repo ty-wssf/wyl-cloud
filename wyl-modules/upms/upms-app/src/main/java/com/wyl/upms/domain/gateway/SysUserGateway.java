@@ -86,5 +86,11 @@ public interface SysUserGateway {
      */
     void deleteByPrimaryKey(Long primaryKey);
 
+    SysUser queryByUserName(String userName);
+
+    SysUser queryByPhonenumber(String phonenumber);
+
+    SysUser queryByEmail(String email);
+
 }
 

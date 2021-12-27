@@ -86,5 +86,13 @@ public interface SysDictTypeGateway {
      */
     void deleteByPrimaryKey(Long primaryKey);
 
+    /**
+     * 通过字典类型查询数据
+     *
+     * @param dictType
+     * @return
+     */
+    SysDictType queryByDictType(String dictType);
+
 }
 

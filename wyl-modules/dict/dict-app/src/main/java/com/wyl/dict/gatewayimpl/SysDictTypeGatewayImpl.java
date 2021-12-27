@@ -132,5 +132,10 @@ public class SysDictTypeGatewayImpl implements SysDictTypeGateway {
         Assert.isTrue(sysDictTypeDao.deleteByPrimaryKey(primaryKey) > 0, "删除对象不存在");
     }
 
+    @Override
+    public SysDictType queryByDictType(String dictType) {
+        return sysDictTypeDao.queryByDictType(dictType);
+    }
+
 }
 

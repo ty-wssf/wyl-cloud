@@ -26,6 +26,11 @@ public class SysDictType extends BaseEntity {
     private String dictType;
 
     /**
+     * 字典数据类型（1字符串 2数字）
+     */
+    private String dataType;
+
+    /**
      * 状态（0正常 1停用）
      */
     private String status;

@@ -82,14 +82,11 @@ public class SysUserAddCommand extends Command {
      */
     @ApiModelProperty(value = "帐号状态（0正常 1停用）", position = 11)
     @NotNull(message = "帐号状态（0正常 1停用）不能为空")
-    @Range(max = 1, message = "帐号状态（0正常 1停用）长度不能超过{max}个字符")
     private Integer status;
     /**
      * 删除标志（0代表存在 2代表删除）
      */
     @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）", position = 12)
-    @NotNull(message = "删除标志（0代表存在 2代表删除）不能为空")
-    @Range(max = 1, message = "删除标志（0代表存在 2代表删除）长度不能超过{max}个字符")
     private Integer delFlag;
     /**
      * 最后登录IP
@@ -130,5 +127,8 @@ public class SysUserAddCommand extends Command {
     @ApiModelProperty(value = "备注", position = 19)
     @Size(max = 512, message = "备注长度不能超过{max}个字符")
     private String remark;
+
+    private Long[] postIds;
+    private Long[] roleIds;
 
 }

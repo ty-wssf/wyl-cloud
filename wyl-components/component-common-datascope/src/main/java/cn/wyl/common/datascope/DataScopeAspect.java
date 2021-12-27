@@ -67,7 +67,7 @@ public class DataScopeAspect {
         loginUser.setDeptId(100L);
         Role role1 = new Role();
         role1.setDataScope("4");
-        loginUser.addRole(role1);
+        // loginUser.addRole(role1);
         // 如果是超级管理员，则不过滤数据
         if (loginUser != null && !loginUser.isAdmin()) {
             dataScopeFilter(joinPoint, loginUser, controllerDataScope.deptAlias(),

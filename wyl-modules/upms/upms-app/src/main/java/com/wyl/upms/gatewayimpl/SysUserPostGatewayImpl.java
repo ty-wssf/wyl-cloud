@@ -1,13 +1,12 @@
 package com.wyl.upms.gatewayimpl;
 
-import cn.wyl.common.core.exception.Assert;
-import com.wyl.upms.gatewayimpl.database.dataobject.SysUserPost;
-import com.wyl.upms.domain.gateway.SysUserPostGateway;
-import com.wyl.upms.gatewayimpl.database.SysUserPostDao;
-import org.apache.ibatis.annotations.Param;
 import cn.wyl.common.core.dto.PageResponse;
+import cn.wyl.common.core.exception.Assert;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wyl.upms.domain.gateway.SysUserPostGateway;
+import com.wyl.upms.gatewayimpl.database.SysUserPostDao;
+import com.wyl.upms.gatewayimpl.database.dataobject.SysUserPost;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -95,19 +94,8 @@ public class SysUserPostGatewayImpl implements SysUserPostGateway {
      * @return 影响行数
      */
     @Override
-    public void insertBatch(@Param("entities") List<SysUserPost> entities) {
-        sysUserPostDao.insertBatch(entities);
-    }
-
-    /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<SysUserPost> 实例对象列表
-     * @return 影响行数
-     */
-    @Override
-    public void insertOrUpdateBatch(@Param("entities") List<SysUserPost> entities) {
-        sysUserPostDao.insertOrUpdateBatch(entities);
+    public void insertBatch(List<SysUserPost> entities) {
+        entities.forEach(this::insert);
     }
 
     /**
@@ -130,6 +118,11 @@ public class SysUserPostGatewayImpl implements SysUserPostGateway {
     @Override
     public void deleteByPrimaryKey(Long primaryKey) {
         Assert.isTrue(sysUserPostDao.deleteByPrimaryKey(primaryKey) > 0, "删除对象不存在");
+    }
+
+    @Override
+    public void deleteUserPostByUserId(Long userId) {
+        sysUserPostDao.deleteUserPostByUserId(userId);
     }
 
 }

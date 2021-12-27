@@ -96,18 +96,7 @@ public class SysUserRoleGatewayImpl implements SysUserRoleGateway {
      */
     @Override
     public void insertBatch(@Param("entities") List<SysUserRole> entities) {
-        sysUserRoleDao.insertBatch(entities);
-    }
-
-    /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<SysUserRole> 实例对象列表
-     * @return 影响行数
-     */
-    @Override
-    public void insertOrUpdateBatch(@Param("entities") List<SysUserRole> entities) {
-        sysUserRoleDao.insertOrUpdateBatch(entities);
+        entities.forEach(this::insert);
     }
 
     /**
@@ -130,6 +119,11 @@ public class SysUserRoleGatewayImpl implements SysUserRoleGateway {
     @Override
     public void deleteByPrimaryKey(Long primaryKey) {
         Assert.isTrue(sysUserRoleDao.deleteByPrimaryKey(primaryKey) > 0, "删除对象不存在");
+    }
+
+    @Override
+    public void deleteUserRoleByUserId(Long userId) {
+        sysUserRoleDao.deleteUserRoleByUserId(userId);
     }
 
 }

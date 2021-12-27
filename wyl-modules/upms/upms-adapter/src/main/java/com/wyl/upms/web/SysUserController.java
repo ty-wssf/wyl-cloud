@@ -13,6 +13,7 @@ import com.wyl.upms.dto.command.SysUserAddCommand;
 import com.wyl.upms.dto.command.SysUserEditCommand;
 import com.wyl.upms.dto.qry.SysUserPageQry;
 import com.wyl.upms.dto.qry.SysUserQry;
+import com.wyl.upms.gatewayimpl.database.dataobject.SysUser;
 import com.wyl.upms.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -88,5 +89,11 @@ public class SysUserController extends BaseController {
         util.exportExcel(response, list.getData(), "用户信息表数据");
     }
     /* 基础接口结束 */
+
+    @PutMapping("/resetPwd")
+    public Response resetPwd(@RequestBody SysUser user) {
+        sysUserService.resetPwd(user);
+        return Response.buildSuccess();
+    }
 
 }

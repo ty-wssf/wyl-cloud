@@ -160,9 +160,6 @@
             <if test="deptId != null">
                 dept_id = #{deptId},
             </if>
-            <if test="userName != null">
-                user_name = #{userName},
-            </if>
             <if test="nickName != null">
                 nick_name = #{nickName},
             </if>
@@ -219,6 +216,18 @@
     <delete id="deleteByPrimaryKey">
         delete from sys_user where user_id = #{userId}
     </delete>
+
+    <select id="queryOneByUserName" resultMap="SysUserMap">
+        select * from sys_user where user_name = #{userName}
+    </select>
+
+    <select id="queryOneByPhonenumber" resultMap="SysUserMap">
+        select * from sys_user where phonenumber = #{phonenumber}
+    </select>
+
+    <select id="queryOneByEmail" resultMap="SysUserMap">
+        select * from sys_user where email = #{email}
+    </select>
 
 </mapper>
 

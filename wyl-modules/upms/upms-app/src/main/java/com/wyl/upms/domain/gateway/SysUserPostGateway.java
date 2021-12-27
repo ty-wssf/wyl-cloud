@@ -63,14 +63,6 @@ public interface SysUserPostGateway {
     void insertBatch(@Param("entities") List<SysUserPost> entities);
 
     /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<SysUserPost> 实例对象列表
-     * @return 影响行数
-     */
-    void insertOrUpdateBatch(@Param("entities") List<SysUserPost> entities);
-
-    /**
      * 修改数据
      *
      * @param sysUserPost 实例对象
@@ -85,6 +77,13 @@ public interface SysUserPostGateway {
      * @return 影响行数
      */
     void deleteByPrimaryKey(Long primaryKey);
+
+    /**
+     * 删除用户与岗位关联
+     *
+     * @param userId
+     */
+    void deleteUserPostByUserId(Long userId);
 
 }
 

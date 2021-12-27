@@ -35,7 +35,7 @@ public class SysDictDataCO implements Serializable {
      * 字典键值
      */
     @Excel(name = "字典键值")
-    private String dictValue;
+    private Object dictValue;
     /**
      * 字典类型
      */

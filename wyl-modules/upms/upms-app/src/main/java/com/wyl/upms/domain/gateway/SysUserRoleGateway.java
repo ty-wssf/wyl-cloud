@@ -1,8 +1,7 @@
 package com.wyl.upms.domain.gateway;
 
-import com.wyl.upms.gatewayimpl.database.dataobject.SysUserRole;
 import cn.wyl.common.core.dto.PageResponse;
-import org.apache.ibatis.annotations.Param;
+import com.wyl.upms.gatewayimpl.database.dataobject.SysUserRole;
 
 import java.util.List;
 
@@ -60,15 +59,7 @@ public interface SysUserRoleGateway {
      * @param entities List<SysUserRole> 实例对象列表
      * @return 影响行数
      */
-    void insertBatch(@Param("entities") List<SysUserRole> entities);
-
-    /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<SysUserRole> 实例对象列表
-     * @return 影响行数
-     */
-    void insertOrUpdateBatch(@Param("entities") List<SysUserRole> entities);
+    void insertBatch(List<SysUserRole> entities);
 
     /**
      * 修改数据
@@ -85,6 +76,13 @@ public interface SysUserRoleGateway {
      * @return 影响行数
      */
     void deleteByPrimaryKey(Long primaryKey);
+
+    /**
+     * 删除用户与角色关联
+     *
+     * @param userId
+     */
+    void deleteUserRoleByUserId(Long userId);
 
 }
 

@@ -373,7 +373,7 @@
       // 表单重置
       reset() {
         this.form = {
-          status: "0",
+          status: 0,
           postIds: [],
           roleIds: []
         };
@@ -427,7 +427,7 @@
         this.$modal.confirm('是否确认删除用户编号为"' + userIds + '"的数据项？').then(function () {
           return remove(userIds);
         }).then(() => {
-          this.getList();
+          this.pageList();
           this.$modal.msgSuccess("删除成功");
         }).catch(() => {
         });
@@ -473,13 +473,13 @@
       },
       // 用户状态修改
       handleStatusChange(row) {
-        let text = row.status === "0" ? "启用" : "停用";
+        let text = row.status === 0 ? "启用" : "停用";
         this.$modal.confirm('确认要"' + text + '""' + row.userName + '"用户吗？').then(function () {
           return edit(row.userId, {"status": row.status});
         }).then(() => {
           this.$modal.msgSuccess(text + "成功");
         }).catch(function () {
-          row.status = row.status === "0" ? "1" : "0";
+          row.status = row.status === 0 ? 1 : 0;
         });
       },
     }
