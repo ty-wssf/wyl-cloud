@@ -44,3 +44,15 @@ export function remove(id) {
     method: 'delete'
   })
 }
+
+// 重置用户密码
+export function resetUserPwd(userId, password) {
+  const data = {
+    password
+  }
+  return request({
+    url: baseUrl + '/resetPwd/' + userId,
+    method: 'put',
+    data: data
+  })
+}

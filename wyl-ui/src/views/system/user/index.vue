@@ -130,9 +130,9 @@
               <el-dropdown-item command="handleResetPwd" icon="el-icon-key"
               >重置密码
               </el-dropdown-item>
-              <el-dropdown-item command="handleAuthRole" icon="el-icon-circle-check"
+              <!--<el-dropdown-item command="handleAuthRole" icon="el-icon-circle-check"
               >分配角色
-              </el-dropdown-item>
+              </el-dropdown-item>-->
             </el-dropdown-menu>
           </el-dropdown>
         </template>
@@ -258,7 +258,7 @@
 </template>
 
 <script>
-  import {pageList, getInfo, add, edit, remove} from "@/api/system/user";
+  import {pageList, getInfo, add, edit, remove, resetUserPwd} from "@/api/system/user";
   import {queryAll as roleList} from "@/api/system/role";
   import {queryAll as postList} from "@/api/system/post";
   import {treeList} from "@/api/system/dept";
@@ -480,6 +480,34 @@
           this.$modal.msgSuccess(text + "成功");
         }).catch(function () {
           row.status = row.status === 0 ? 1 : 0;
+        });
+      },
+      // 更多操作触发
+      handleCommand(command, row) {
+        switch (command) {
+          case "handleResetPwd":
+            this.handleResetPwd(row);
+            break;
+          case "handleAuthRole":
+            this.handleAuthRole(row);
+            break;
+          default:
+            break;
+        }
+      },
+      /** 重置密码按钮操作 */
+      handleResetPwd(row) {
+        this.$prompt('请输入"' + row.userName + '"的新密码', "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          closeOnClickModal: false,
+          inputPattern: /^.{5,20}$/,
+          inputErrorMessage: "用户密码长度必须介于 5 和 20 之间"
+        }).then(({value}) => {
+          resetUserPwd(row.userId, value).then(response => {
+            this.$modal.msgSuccess("修改成功，新密码是：" + value);
+          });
+        }).catch(() => {
         });
       },
     }

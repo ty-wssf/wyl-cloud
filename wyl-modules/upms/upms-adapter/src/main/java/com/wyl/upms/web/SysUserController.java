@@ -90,10 +90,11 @@ public class SysUserController extends BaseController {
     }
     /* 基础接口结束 */
 
-    @PutMapping("/resetPwd")
-    public Response resetPwd(@RequestBody SysUser user) {
-        sysUserService.resetPwd(user);
-        return Response.buildSuccess();
+    @ApiOperation(value = "重置密码")
+    @PutMapping("/resetPwd/{userId}")
+    public Response resetPwd(@RequestBody SysUser user, @PathVariable Long userId) {
+        user.setUserId(userId);
+        return sysUserService.resetPwd(user);
     }
 
 }

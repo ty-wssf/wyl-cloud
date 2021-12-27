@@ -129,6 +129,6 @@ public interface SysUserService {
      *
      * @param user 用户信息
      */
-    void resetPwd(SysUser user);
+    Response resetPwd(SysUser user);
 
 }

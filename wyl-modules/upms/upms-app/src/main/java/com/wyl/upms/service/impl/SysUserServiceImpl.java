@@ -285,10 +285,11 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public void resetPwd(SysUser user) {
+    public Response resetPwd(SysUser user) {
         checkUserAllowed(user);
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
         sysUserGateway.update(user);
+        return Response.buildSuccess();
     }
 
 }
