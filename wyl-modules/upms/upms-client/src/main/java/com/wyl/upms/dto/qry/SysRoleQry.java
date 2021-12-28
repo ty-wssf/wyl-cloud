@@ -39,7 +39,7 @@ public class SysRoleQry extends Query {
      * 角色状态（0正常 1停用）
      */
     @ApiModelProperty(value = "角色状态（0正常 1停用）", position = 5)
-    private String status;
+    private Integer status;
     /**
      * 删除标志（0代表存在 2代表删除）
      */

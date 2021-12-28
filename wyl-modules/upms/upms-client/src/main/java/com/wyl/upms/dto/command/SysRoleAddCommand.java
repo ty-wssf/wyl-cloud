@@ -4,7 +4,6 @@ import cn.wyl.common.core.dto.Command;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -45,21 +44,16 @@ public class SysRoleAddCommand extends Command {
      * 数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
      */
     @ApiModelProperty(value = "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）", position = 5)
-    @NotNull(message = "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）不能为空")
-    @Range(max = 1, message = "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）长度不能超过{max}个字符")
     private Integer dataScope;
     /**
      * 角色状态（0正常 1停用）
      */
     @ApiModelProperty(value = "角色状态（0正常 1停用）", position = 6)
-    @NotBlank(message = "角色状态（0正常 1停用）不能为空")
-    @Size(max = 1, message = "角色状态（0正常 1停用）长度不能超过{max}个字符")
-    private String status;
+    private Integer status;
     /**
      * 删除标志（0代表存在 2代表删除）
      */
     @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）", position = 7)
-    @NotBlank(message = "删除标志（0代表存在 2代表删除）不能为空")
     @Size(max = 1, message = "删除标志（0代表存在 2代表删除）长度不能超过{max}个字符")
     private String delFlag;
     /**
