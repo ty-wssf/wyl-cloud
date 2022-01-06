@@ -2,7 +2,6 @@ package com.wyl.component.extension;
 
 import org.springframework.stereotype.Component;
 
-@Extension()
 @Component
 public class SomeExtensionA implements SomeExtPt {
 

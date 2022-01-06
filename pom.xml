@@ -8,9 +8,11 @@
     <artifactId>wyl-cloud</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>wyl-components</module>
         <module>wyl-modules</module>
+        <module>wyl-auth</module>
     </modules>
 
     <properties>
@@ -26,6 +28,19 @@
 
         <poi.version>4.1.2</poi.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- bootstrap 启动器 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+    </dependencies>
 
     <!-- 依赖声明 -->
     <dependencyManagement>
