@@ -21,6 +21,10 @@ public class WylUser extends User {
     @Getter
     private final Integer deptId;
 
+    public WylUser(Integer id, Integer deptId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        this(id, deptId, username, password, true, true, true, true, authorities);
+    }
+
     /**
      * Construct the <code>User</code> with the details required by
      * {@link DaoAuthenticationProvider}.

@@ -59,5 +59,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
+        <!--切面-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wyl</groupId>
+            <artifactId>component-common-dto</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
